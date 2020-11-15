@@ -15,7 +15,7 @@ body {
   width: 100%;
 }
 
-.card {
+.card-login {
     padding: 25px 50px 25px 50px
 }
 
@@ -25,3 +25,15 @@ body {
     padding-right: 20px;
 }
 
+/*                        Navbar                           */
+
+.navbar-logo {
+    height: 100px;
+    width: 100px;
+}
+
+/*                        Accordion                           */
+    
+.container-tickets {
+    margin-top: 10%;
+}

@@ -24,13 +24,17 @@
       rel="stylesheet"
     />
     <!-- CSS -->
-    <link rel="stylesheet" href="../static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+      type="text/css"
+    />
 
     <title>Bug Tracker</title>
   </head>
   <body>
     <div class="container login-container">
-      <form class="text-center card" action="#!">
+      <form class="text-center card-login" action="#!">
         <div class="col">
           <img
             src="../static/images/logo.png"
@@ -69,7 +73,7 @@
             <button
               class="btn btn-outline-info btn-rounded m-1 waves-effect z-depth-0"
               type="submit"
-              href="#"
+              href="signup.html"
             >
               Sign Up
             </button>
