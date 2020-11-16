@@ -5,112 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Font Awesome -->
     <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
     />
-    <!-- Google Fonts -->
+    <!--Import materialize.css-->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <!-- Bootstrap core CSS -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Material Design Bootstrap -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
-      rel="stylesheet"
-    />
-    <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-      type="text/css"
-    />
-
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" />
     <title>Bug Tracker</title>
   </head>
-  <body>
-    <div class="container login-container">
-      <form class="text-center card-login" action="#!">
-        <div class="col">
-          <img
-            src="../static/images/logo.png"
-            class="img-fluid mb-4"
-            alt="Bug Tracker Logo"
-          />
+  <div class="container container-login">
+    <div class="card">
+      <div class="card-content">
+        <div class="row center-align logo-login">
+          <img src="../static/images/logo.png" alt="Bug Tracker Logo" />
         </div>
-        <div class="md-form">
-          <input
-            type="text"
-            id="login-username"
-            name="login-username"
-            class="form-control"
-          />
-          <label for="login-password">Username</label>
-        </div>
-        <div class="md-form">
-          <input
-            type="password"
-            name="login-password"
-            id="login-password"
-            class="form-control"
-          />
-          <label for="login-password">Password</label>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <button
-              class="btn btn-info btn-rounded m-1 waves-effect z-depth-0"
-              type="submit"
-              href="#"
-            >
-              Log In
-            </button>
-
-            <button
-              class="btn btn-outline-info btn-rounded m-1 waves-effect z-depth-0"
-              type="submit"
-              href="signup.html"
-            >
-              Sign Up
-            </button>
+        <form>
+          <div class="row">
+            <div class="input-field row">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" class="validate" />
+              <label for="icon_prefix">Username</label>
+            </div>
+            <div class="input-field row">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="icon_telephone" type="password" class="validate" />
+              <label for="icon_telephone">Password</label>
+            </div>
           </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <a href="#">Demo login</a>
+          <div class="row right-align">
+            <a class="waves-effect waves-light btn">Login</a>
           </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col">
-            <a href="#">Forgot your password?</a>
+          <div class="row center-align login-links">
+            <a href="dashboard.html">Demo user login</a><br />
+            <a href="new_password.html" target="_blank">Forgot your password?</a
+            ><br />
+            <a href="signup.html" target="_blank">Register new account</a><br />
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-
+  </div>
+  <body>
     <!-- JQuery -->
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     ></script>
-    <!-- Bootstrap tooltips -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
-    ></script>
-    <!-- Bootstrap core JavaScript -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
-    ></script>
-    <!-- MDB core JavaScript -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
-    ></script>
+    <!-- Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Local JS -->
+    <script type="text/javascript" src="../static/js/script.js"></script>
   </body>
 </html>

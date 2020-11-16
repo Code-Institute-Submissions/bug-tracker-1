@@ -1,28 +1,7 @@
-
 html,
 body {
   height: 100%;
   width: 100%;
-}
-
-/*                        Login Page                           */
-
-.login-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-
-.card-login {
-    padding: 25px 50px 25px 50px
-}
-
-.btn-rounded {
-    border-radius: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 /*                        Navbar                           */
@@ -32,8 +11,32 @@ body {
     width: 100px;
 }
 
-/*                        Accordion                           */
+/*                        Login Page                           */
+
+.container-login {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.logo-login {
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.container-login > .card{
+    min-width: 330px;
+}
+
+.login-links {
+    margin-bottom: 0;
+}
+
+/*                        Dashboard                           */
     
 .container-tickets {
-    margin-top: 10%;
+    margin-top: 5%;
+    max-width: 900px;
 }
