@@ -4,11 +4,22 @@ body {
   width: 100%;
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
 /*                        Navbar                           */
 
 .navbar-logo {
-    height: 100px;
-    width: 100px;
+    height: 55px;
+    margin-left: 10px;
+    margin-top: 4px
 }
 
 /*                        Login Page                           */
@@ -40,3 +51,24 @@ body {
     margin-top: 5%;
     max-width: 900px;
 }
+
+
+/*                        Footer                           */
+.footer {
+    height: auto;
+    margin-top: auto;
+  }
+  
+  .text-copyright {
+    margin-top: 2px;
+  }
+
+  .social-link {
+      font-size: 25px;
+  }
+
+  .footer > .row {
+      margin-bottom: 0;
+      padding-bottom: 5px;
+      padding-top: 7px;
+  }
