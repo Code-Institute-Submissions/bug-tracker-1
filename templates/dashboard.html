@@ -27,7 +27,7 @@
   </head>
   {% block styles %} {% endblock %} {% block content %}
   <body>
-    <ul id="dropdownUser" class="dropdown-content">
+    <ul id="dropdown-user" class="dropdown-content">
       <li>
         <a href="#!"><i class="material-icons">account_circle</i>Account</a>
       </li>
@@ -63,10 +63,9 @@
           </li>
           <!-- Dropdown Trigger -->
           <li>
-            <a class="dropdown-trigger" href="#!" data-target="dropdownUser"
-              >Hello, Username<i class="material-icons right"
-                >arrow_drop_down</i
-              ></a
+            <a class="dropdown-trigger" href="#!" data-target="dropdown-user"
+              ><i class="material-icons left">account_circle</i>Hello,
+              Username<i class="material-icons right">arrow_drop_down</i></a
             >
           </li>
         </ul>
@@ -99,12 +98,84 @@
       </div>
     </nav>
 
+    <section>
+      <div class="row">
+        <!-- Tabs -->
+        <div class="container container-tickets">
+          <ul class="tabs teal-text">
+            <li
+              class="tab col s4 input-field search-tab-wrapper hide-on-small-only"
+            >
+              <input
+                type="text"
+                id="search-tab"
+                name="search-tab"
+                class="autocomplete"
+              />
+              <label for="search-tab">search</label>
+            </li>
+            <li class="tab col s2">
+              <a href="#test1">Open</a>
+            </li>
+            <li class="tab col s2">
+              <a href="#test1">In Progress</a>
+            </li>
+            <li class="tab col s2">
+              <a href="#test1">Resolved</a>
+            </li>
+            <li class="tab col s2">
+              <a href="#test1">On Hold</a>
+            </li>
+          </ul>
+          <!-- Collapsible -->
+          <div class="tickets-wrapper">
+            <ul class="collapsible">
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">article</i>Ticket #1
+                  <div class="arrow-collapsible">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                  </div>
+                </div>
+                <div class="collapsible-body teal lighten-2">
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="row">
+                        <div class="chip">Created: 20/20/2020</div>
+                        <div class="chip">Due: 30/30/3030</div>
+                      </div>
+                      <div class="row">
+                        <p>
+                          Lorem, ipsum dolor sit amet consectetur adipisicing
+                          elit. Necessitatibus architecto ratione totam sed
+                          molestiae velit soluta deleniti consequuntur culpa,
+                          dolores qui! Modi error enim nemo, recusandae adipisci
+                          iste ducimus illo.
+                        </p>
+                      </div>
+                      <div class="row">
+                        <a
+                          class="waves-effect waves-light btn right"
+                          href="#"
+                          target="_blank"
+                          >Details</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <div class="footer teal">
       <div class="row white-text">
         <div class="col left-align text-copyright">
           © 2020 Copyright:<a
-            class="white-text"
             id="text-footer"
             href="https://thiagohardt.github.io/thiago-hardt-portfolio"
             target="_blank"
