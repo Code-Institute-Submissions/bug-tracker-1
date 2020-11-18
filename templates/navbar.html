@@ -1,0 +1,68 @@
+<body>
+  <ul id="dropdown-user" class="dropdown-content">
+    <li>
+      <a href="#!"><i class="material-icons">account_circle</i>Account</a>
+    </li>
+    <li>
+      <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
+    </li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper teal">
+      <a href="#!" class="brand-logo">
+        <img
+          class="navbar-logo hide-on-med-and-down"
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="Bug Tracker Logo"
+      /></a>
+      <a href="#" data-target="sidenav" class="sidenav-trigger"
+        ><i class="material-icons">menu</i></a
+      >
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="#!"><i class="material-icons left">dashboard</i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#!"><i class="material-icons left">insights</i>Stats</a>
+        </li>
+        <li>
+          <a href="#!"
+            ><i class="material-icons left">add_circle_outline</i>New Ticket</a
+          >
+        </li>
+        <!-- Dropdown Trigger -->
+        <li>
+          <a class="dropdown-trigger" href="#!" data-target="dropdown-user"
+            ><i class="material-icons left">account_circle</i>Hello, Username<i
+              class="material-icons right"
+              >arrow_drop_down</i
+            ></a
+          >
+        </li>
+      </ul>
+      <!-- Sidenav -->
+      <ul class="sidenav" id="sidenav">
+        <li>
+          <a href="#!" class="center-align">Hello, Username</a>
+        </li>
+        <li>
+          <a href="#!"><i class="material-icons left">dashboard</i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#!"><i class="material-icons left">insights</i>Stats</a>
+        </li>
+        <li>
+          <a href="#!"
+            ><i class="material-icons left">add_circle_outline</i>New Ticket</a
+          >
+        </li>
+        <li>
+          <a href="#!"><i class="material-icons">account_circle</i>Account</a>
+        </li>
+        <li>
+          <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</body>

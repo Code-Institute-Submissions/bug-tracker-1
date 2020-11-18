@@ -28,6 +28,16 @@ def dashboard():
     return render_template("dashboard.html")
 
 
+@app.route('/new_ticket')
+def new_ticket():
+    return render_template("new_ticket.html")
+
+
+@app.route('/ticket')
+def get_ticket():
+    return render_template("ticket.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

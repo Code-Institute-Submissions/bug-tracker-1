@@ -1,229 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Font Awesome -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!--Import materialize.css-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <script
-      src="https://kit.fontawesome.com/ad3578afcd.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Local CSS -->
-    <link
-      rel="stylesheet"
-      href=".{{ url_for('static', filename='css/style.css') }}"
-      type="text/css"
-    />
-    <title>Bug Tracker</title>
-  </head>
-  {% block styles %} {% endblock %} {% block content %}
-  <body>
-    <ul id="dropdown-user" class="dropdown-content">
-      <li>
-        <a href="#!"><i class="material-icons">account_circle</i>Account</a>
-      </li>
-      <li>
-        <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
-      </li>
-    </ul>
-    <nav>
-      <div class="nav-wrapper teal">
-        <a href="#!" class="brand-logo">
-          <img
-            class="navbar-logo hide-on-med-and-down"
-            src="{{ url_for('static', filename='images/logo.png') }}"
-            alt="Bug Tracker Logo"
-        /></a>
-        <a href="#" data-target="sidenav" class="sidenav-trigger"
-          ><i class="material-icons">menu</i></a
+{% include 'head.html' %} {% include 'navbar.html' %}
+<section>
+  <div class="row">
+    <!-- Tabs -->
+    <div class="container container-tickets">
+      <ul class="tabs teal-text">
+        <li
+          class="tab col s4 input-field search-tab-wrapper hide-on-small-only"
         >
-        <ul class="right hide-on-med-and-down">
+          <input
+            type="text"
+            id="search-tab"
+            name="search-tab"
+            class="autocomplete"
+          />
+          <label for="search-tab">search</label>
+        </li>
+        <li class="tab col s2">
+          <a href="#test1">Open</a>
+        </li>
+        <li class="tab col s2">
+          <a href="#test1">In Progress</a>
+        </li>
+        <li class="tab col s2">
+          <a href="#test1">Resolved</a>
+        </li>
+        <li class="tab col s2">
+          <a href="#test1">On Hold</a>
+        </li>
+      </ul>
+      <!-- Collapsible -->
+      <div class="tickets-wrapper">
+        <ul class="collapsible">
           <li>
-            <a href="#!"
-              ><i class="material-icons left">dashboard</i>Dashboard</a
-            >
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons left">insights</i>Stats</a>
-          </li>
-          <li>
-            <a href="#!"
-              ><i class="material-icons left">add_circle_outline</i>New
-              Ticket</a
-            >
-          </li>
-          <!-- Dropdown Trigger -->
-          <li>
-            <a class="dropdown-trigger" href="#!" data-target="dropdown-user"
-              ><i class="material-icons left">account_circle</i>Hello,
-              Username<i class="material-icons right">arrow_drop_down</i></a
-            >
-          </li>
-        </ul>
-        <!-- Sidenav -->
-        <ul class="sidenav" id="sidenav">
-          <li>
-            <a href="#!" class="center-align">Hello, Username</a>
-          </li>
-          <li>
-            <a href="#!"
-              ><i class="material-icons left">dashboard</i>Dashboard</a
-            >
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons left">insights</i>Stats</a>
-          </li>
-          <li>
-            <a href="#!"
-              ><i class="material-icons left">add_circle_outline</i>New
-              Ticket</a
-            >
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons">account_circle</i>Account</a>
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <section>
-      <div class="row">
-        <!-- Tabs -->
-        <div class="container container-tickets">
-          <ul class="tabs teal-text">
-            <li
-              class="tab col s4 input-field search-tab-wrapper hide-on-small-only"
-            >
-              <input
-                type="text"
-                id="search-tab"
-                name="search-tab"
-                class="autocomplete"
-              />
-              <label for="search-tab">search</label>
-            </li>
-            <li class="tab col s2">
-              <a href="#test1">Open</a>
-            </li>
-            <li class="tab col s2">
-              <a href="#test1">In Progress</a>
-            </li>
-            <li class="tab col s2">
-              <a href="#test1">Resolved</a>
-            </li>
-            <li class="tab col s2">
-              <a href="#test1">On Hold</a>
-            </li>
-          </ul>
-          <!-- Collapsible -->
-          <div class="tickets-wrapper">
-            <ul class="collapsible">
-              <li>
-                <div class="collapsible-header">
-                  <i class="material-icons">article</i>Ticket #1
-                  <div class="arrow-collapsible">
-                    <i class="material-icons">keyboard_arrow_down</i>
+            <div class="collapsible-header">
+              <i class="material-icons">article</i>Ticket #1
+              <div class="arrow-collapsible">
+                <i class="material-icons">keyboard_arrow_down</i>
+              </div>
+            </div>
+            <div class="collapsible-body teal lighten-2">
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class="chip">Created: 20/20/2020</div>
+                    <div class="chip">Due: 30/30/3030</div>
+                  </div>
+                  <div class="row">
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Necessitatibus architecto ratione totam sed molestiae
+                      velit soluta deleniti consequuntur culpa, dolores qui!
+                      Modi error enim nemo, recusandae adipisci iste ducimus
+                      illo.
+                    </p>
+                  </div>
+                  <div class="row">
+                    <a
+                      class="waves-effect waves-light btn right"
+                      href="#"
+                      target="_blank"
+                      >Details</a
+                    >
                   </div>
                 </div>
-                <div class="collapsible-body teal lighten-2">
-                  <div class="card">
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="chip">Created: 20/20/2020</div>
-                        <div class="chip">Due: 30/30/3030</div>
-                      </div>
-                      <div class="row">
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Necessitatibus architecto ratione totam sed
-                          molestiae velit soluta deleniti consequuntur culpa,
-                          dolores qui! Modi error enim nemo, recusandae adipisci
-                          iste ducimus illo.
-                        </p>
-                      </div>
-                      <div class="row">
-                        <a
-                          class="waves-effect waves-light btn right"
-                          href="#"
-                          target="_blank"
-                          >Details</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <div class="footer teal">
-      <div class="row white-text">
-        <div class="col left-align text-copyright">
-          © 2020 Copyright:<a
-            id="text-footer"
-            href="https://thiagohardt.github.io/thiago-hardt-portfolio"
-            target="_blank"
-          >
-            Thiago Hardt</a
-          >
-        </div>
-        <div class="col right">
-          <a
-            class="white-text"
-            href="https://www.linkedin.com/in/thiago-hardt-461144195"
-            target="_blank"
-            ><i class="fab fa-linkedin social-link"></i
-          ></a>
-          <a
-            class="white-text"
-            href="https://github.com/ThiagoHardt"
-            target="_blank"
-            ><i class="fab fa-github-square social-link"></i
-          ></a>
-          <a
-            class="white-text"
-            href="https://www.facebook.com/thiago.hardt/"
-            target="_blank"
-            ><i class="fab fa-facebook-square social-link"></i
-          ></a>
-          <a
-            class="white-text"
-            href="https://www.instagram.com/thiagohardt/"
-            target="_blank"
-            ><i class="fab fa-instagram-square social-link"></i
-          ></a>
-        </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-    {% endblock %}
-    <!-- JQuery -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    ></script>
-    <!-- Materialize -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Local JS -->
-    <script
-      type="text/javascript"
-      src="{{ url_for('static', filename='js/script.js') }}"
-    ></script>
-    {% block scripts %} {% endblock %}
-  </body>
-</html>
+  </div>
+</section>
+{% include "footer.html" %} {% include "scripts.html" %}

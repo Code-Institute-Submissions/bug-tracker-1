@@ -1,0 +1,70 @@
+{% include 'head.html' %} {% include 'navbar.html' %}
+<div class="container container-tickets">
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+        <form class="row">
+          <div class="row">
+            <span class="card-title">New Ticket</span>
+          </div>
+          <div class="input-field col s12 l5">
+            <input
+              id="ticket-title"
+              name="ticket-title"
+              type="text"
+              class="validate"
+              placeholder=""
+              required
+            />
+            <label for="ticket-title">Ticket Title</label>
+          </div>
+          <div class="input-field col s12 l4">
+            <input
+              id="due-date"
+              name="due-date"
+              type="text"
+              class="datepicker"
+              placeholder=""
+              required
+            />
+            <label for="due-date">Due Date</label>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea
+                id="description"
+                name="description"
+                class="materialize-textarea validate"
+                placeholder=""
+                required
+              ></textarea>
+              <label for="description">Ticket Description</label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <div class="switch">
+                  <label>
+                    <input type="checkbox" />
+                    <span class="lever"></span>
+                    Urgent
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row right">
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="submit"
+            >
+              Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "footer.html" %} {% include "scripts.html" %}
