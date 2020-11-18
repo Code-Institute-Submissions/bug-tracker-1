@@ -58,6 +58,11 @@ def get_ticket():
     return render_template("ticket.html")
 
 
+@app.route('/stats')
+def stats():
+    return render_template("stats.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
