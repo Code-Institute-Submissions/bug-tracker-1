@@ -5,4 +5,5 @@ $(document).ready(function () {
     $('.tabs').tabs();
     $('.datepicker').datepicker();
     $('select').formSelect();
+    $('.carousel').carousel();
   });
