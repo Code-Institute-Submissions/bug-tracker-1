@@ -5,7 +5,7 @@
       <div class="card-content">
         <form class="row">
           <div class="row">
-            <span class="card-title">New Ticket</span>
+            <span class="card-title teal-text">New Ticket</span>
           </div>
           <div class="input-field col s12 l5">
             <input
@@ -41,7 +41,22 @@
               <label for="description">Ticket Description</label>
             </div>
             <div class="row">
-              <div class="input-field col s12">
+              <div class="col s12 m6 l4">
+                <div class="file-field input-field">
+                  <div class="btn waves-effect waves-light">
+                    <span>File</span>
+                    <input type="file" multiple />
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input
+                      class="file-path validate"
+                      type="text"
+                      placeholder="Upload one or more files"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s12 m4 l2 right">
                 <div class="switch">
                   <label>
                     <input type="checkbox" />
