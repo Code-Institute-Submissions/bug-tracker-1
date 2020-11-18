@@ -106,12 +106,26 @@ a:hover {
     overflow: auto;
 }
 
-/* ################################# Collapsible #################################*/
-
 .arrow-collapsible {
     float: right;
     margin-left: auto;
 }
+
+/* ################################# Profile #################################*/
+
+.card-profile {
+    padding-top: 30px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
 
 /* ################################# Footer #################################*/
 

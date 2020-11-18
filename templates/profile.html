@@ -1,19 +1,17 @@
 {% include 'head.html' %} {% include 'navbar.html' %}
 <div class="container container-tickets">
   <div class="row">
-    <div class="card">
+    <div class="card card-profile">
+      <div class="row center-align profile-picture z-depth-1">
+        <img
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="Bug Tracker Logo"
+        />
+      </div>
       <div class="card-content">
         <form class="row">
           <div class="row">
             <span class="card-title teal-text">User Management</span>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 l5">
-              <input type="text" id="search-user" name="search-user" />
-              <label for="search-user"
-                ><i class="fas fa-search"></i> User Search</label
-              >
-            </div>
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l5">
@@ -73,6 +71,33 @@
             </div>
           </div>
           <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <input
+                id="password"
+                type="password"
+                name="password"
+                class="validate"
+                required
+              />
+              <label for="password">Password</label>
+            </div>
+            <div class="input-field col s12 m6 l6">
+              <input
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                class="validate"
+                required
+              />
+              <label
+                for="confirm-password"
+                data-error="Password must match"
+                data-success="Password Match"
+                >Confirm Password
+              </label>
+            </div>
+          </div>
+          <div class="row">
             <div class="file-field input-field col s12 m6 l6">
               <div class="btn">
                 <span>Profile Picture</span>
@@ -98,19 +123,9 @@
               <button
                 class="btn waves-effect waves-light"
                 type="submit"
-                name="delete"
-              >
-                delete
-                <i class="material-icons right">delete</i>
-              </button>
-            </div>
-            <div class="col">
-              <button
-                class="btn waves-effect waves-light"
-                type="submit"
                 name="submit"
               >
-                submit
+                update
                 <i class="material-icons right">send</i>
               </button>
             </div>
