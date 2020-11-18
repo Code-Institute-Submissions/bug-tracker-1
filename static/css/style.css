@@ -23,6 +23,12 @@ a:hover {
     margin-bottom: 0;
 }
 
+.container {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    max-width: 900px;
+}
+
 /* ################################# Navbar #################################*/
 
 .navbar-logo {
@@ -58,6 +64,7 @@ a:hover {
     
 .container-tickets {
     margin-top: 5%;
+    margin-bottom: 5%;
     max-width: 900px;
 }
 
