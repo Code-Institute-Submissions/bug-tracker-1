@@ -9,7 +9,7 @@
   </ul>
   <nav>
     <div class="nav-wrapper teal">
-      <a href="#!" class="brand-logo">
+      <a href="{{ url_for('dashboard') }}" class="brand-logo">
         <img
           class="navbar-logo hide-on-med-and-down"
           src="{{ url_for('static', filename='images/logo.png') }}"
@@ -20,13 +20,17 @@
       >
       <ul class="right hide-on-med-and-down">
         <li>
-          <a href="#!"><i class="material-icons left">dashboard</i>Dashboard</a>
+          <a href="{{ url_for('dashboard') }}"
+            ><i class="material-icons left">dashboard</i>Dashboard</a
+          >
         </li>
         <li>
-          <a href="#!"><i class="material-icons left">insights</i>Stats</a>
+          <a href="{{ url_for('stats') }}"
+            ><i class="material-icons left">insights</i>Stats</a
+          >
         </li>
         <li>
-          <a href="#!"
+          <a href="{{ url_for('new_ticket') }}"
             ><i class="material-icons left">add_circle_outline</i>New Ticket</a
           >
         </li>
@@ -44,21 +48,29 @@
           <a href="#!" class="center-align">Hello, {{ username }}</a>
         </li>
         <li>
-          <a href="#!"><i class="material-icons left">dashboard</i>Dashboard</a>
+          <a href="{{ url_for('dashboard') }}"
+            ><i class="material-icons left">dashboard</i>Dashboard</a
+          >
         </li>
         <li>
-          <a href="#!"><i class="material-icons left">insights</i>Stats</a>
+          <a href="{{ url_for('stats') }}"
+            ><i class="material-icons left">insights</i>Stats</a
+          >
         </li>
         <li>
-          <a href="#!"
+          <a href="{{ url_for('new_ticket') }}"
             ><i class="material-icons left">add_circle_outline</i>New Ticket</a
           >
         </li>
         <li>
-          <a href="#!"><i class="material-icons">account_circle</i>Profile</a>
+          <a href="{{ url_for('profile') }}"
+            ><i class="material-icons">account_circle</i>Profile</a
+          >
         </li>
         <li>
-          <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
+          <a href="{{ url_for('logout') }}"
+            ><i class="material-icons">exit_to_app</i>Logout</a
+          >
         </li>
       </ul>
     </div>

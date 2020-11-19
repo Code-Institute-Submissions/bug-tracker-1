@@ -48,6 +48,14 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+    # remove user session from session cookies
+    flash("You have been logged out.")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -71,7 +79,7 @@ def signup():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("dashboard"))
     return render_template("signup.html")
 
 
