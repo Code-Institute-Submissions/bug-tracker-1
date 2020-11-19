@@ -33,17 +33,15 @@
         <!-- Dropdown Trigger -->
         <li>
           <a class="dropdown-trigger" href="#!" data-target="dropdown-user"
-            ><i class="material-icons left">account_circle</i>Hello, Username<i
-              class="material-icons right"
-              >arrow_drop_down</i
-            ></a
+            ><i class="material-icons left">account_circle</i>Hello, {{ username
+            }}<i class="material-icons right">arrow_drop_down</i></a
           >
         </li>
       </ul>
       <!-- Sidenav -->
       <ul class="sidenav" id="sidenav">
         <li>
-          <a href="#!" class="center-align">Hello, Username</a>
+          <a href="#!" class="center-align">Hello, {{ username }}</a>
         </li>
         <li>
           <a href="#!"><i class="material-icons left">dashboard</i>Dashboard</a>

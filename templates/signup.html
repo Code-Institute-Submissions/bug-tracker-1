@@ -9,39 +9,39 @@
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form class="row">
+        <form class="row" method="POST" action="{{ url_for('signup') }}">
           <div class="row">
             <span class="card-title teal-text">Create a new account</span>
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l5">
               <input
-                id="first-name"
-                name="first-name"
+                id="username"
+                name="username"
                 type="text"
                 class="validate"
                 placeholder=""
                 required
               />
-              <label for="first-name">First Name</label>
+              <label for="first-name">Username</label>
             </div>
             <div class="input-field col s12 m6 l5">
               <input
-                id="last-name"
-                name="last-name"
+                id="name"
+                name="name"
                 type="text"
                 class="validate"
                 placeholder=""
                 required
               />
-              <label for="last-name">Last Name</label>
+              <label for="last-name">Name</label>
             </div>
             <div class="input-field col s12 m6 l2">
               <input
                 id="dob"
                 name="dob"
                 type="text"
-                class="datepicker"
+                class="datepicker validate"
                 placeholder=""
                 required
               />
@@ -61,18 +61,6 @@
             </div>
             <div class="input-field col s12 m6 l6">
               <input
-                id="confirm-email"
-                name="confirm-email"
-                type="email"
-                class="validate"
-                required
-              />
-              <label for="confirm-email">Confirm Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 m6 l6">
-              <input
                 id="password"
                 type="password"
                 name="password"
@@ -80,21 +68,6 @@
                 required
               />
               <label for="password">Password</label>
-            </div>
-            <div class="input-field col s12 m6 l6">
-              <input
-                id="confirm-password"
-                name="confirm-password"
-                type="password"
-                class="validate"
-                required
-              />
-              <label
-                for="confirm-password"
-                data-error="Password must match"
-                data-success="Password Match"
-                >Confirm Password
-              </label>
             </div>
           </div>
           <div class="row">
@@ -114,6 +87,7 @@
                 class="btn waves-effect waves-light"
                 type="reset"
                 name="reset"
+                class="btn"
               >
                 clear
                 <i class="material-icons right">clear</i>
