@@ -30,27 +30,15 @@ def login_required(f):
     return wrapper
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    # if request.method == "POST":
-    #     # Check if username exists
-    #     existing_user = mongo.db.users.find_one(
-    #         {"username": request.form.get("username")})
-
-    #     if existing_user:
-    #         # Ensure hashed password matches user input
-    #         if check_password_hash(existing_user["password"], request.form.get("password")):
-    #             session["user"] = request.form.get("username")
-    #             return redirect(url_for("dashboard"))
-    #         else:
-    #             # Invalid password match
-    #             flash("Incorrect Username or Password")
-    #             return redirect(url_for("login"))
-    #     else:
-    #         # Username doesn't exist
-    #         flash("Incorrect Username or Password")
-    #         return redirect(url_for("login"))
     return render_template("login.html")
+
+
+@app.route("/user/login", methods=["GET", "POST"])
+def user_login():
+    return User().login()
 
 
 @app.route("/logout")
@@ -135,6 +123,17 @@ class User:
             return self.start_session(user)
 
         return jsonify({"error": "Signup Failed"}), 400
+
+    def login(self):
+
+        user = mongo.db.users.find_one({
+            "username": request.form.get("username")
+        })
+
+        if user and pbkdf2_sha256.verify(request.form.get("password"), user["password"]):
+            return self.start_session(user)
+
+        return jsonify({"error": "Invalid username or password"}), 401
 
     def logout(self):
         session.clear()
