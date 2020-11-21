@@ -4,7 +4,9 @@
       <a href="#!"><i class="material-icons">account_circle</i>Profile</a>
     </li>
     <li>
-      <a href="#!"><i class="material-icons">exit_to_app</i>Logout</a>
+      <a href="{{ url_for('logout') }}"
+        ><i class="material-icons">exit_to_app</i>Logout</a
+      >
     </li>
   </ul>
   <nav>
@@ -37,15 +39,19 @@
         <!-- Dropdown Trigger -->
         <li>
           <a class="dropdown-trigger" href="#!" data-target="dropdown-user"
-            ><i class="material-icons left">account_circle</i>Hello, {{ username
-            }}<i class="material-icons right">arrow_drop_down</i></a
+            ><i class="material-icons left">account_circle</i>Hello, {{
+            session["user"]["username"] }}<i class="material-icons right"
+              >arrow_drop_down</i
+            ></a
           >
         </li>
       </ul>
       <!-- Sidenav -->
       <ul class="sidenav" id="sidenav">
         <li>
-          <a href="#!" class="center-align">Hello, {{ username }}</a>
+          <a href="#!" class="center-align"
+            >Hello, {{ session["user"]["username"] }}</a
+          >
         </li>
         <li>
           <a href="{{ url_for('dashboard') }}"
