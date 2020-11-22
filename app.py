@@ -33,11 +33,8 @@ def login_required(f):
 @app.route("/")
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
-
-
-@app.route("/user/login", methods=["GET", "POST"])
-def user_login():
+    if request.method == "GET":
+        return render_template("login.html")
     return User().login()
 
 
@@ -48,12 +45,10 @@ def logout():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    return render_template("signup.html")
-
-
-@app.route('/user/signup', methods=['GET', 'POST'])
-def user_signup():
-    return User().signup()
+    if request.method == "GET":
+        return render_template("signup.html")
+    else:
+        return User().signup()
 
 
 @app.route('/forgot_password')
@@ -71,7 +66,7 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route('/dashboard/')
+@app.route('/dashboard')
 @login_required
 def dashboard():
     return render_template("dashboard.html")
@@ -98,7 +93,7 @@ class User:
         del user["password"]
         session["logged_in"] = True
         session["user"] = user
-        return jsonify(user), 200
+        return redirect("/dashboard")
 
     def signup(self):
 
@@ -116,13 +111,15 @@ class User:
 
         # Check for duplicates.
         if mongo.db.users.find_one({"email": user["email"]}):
-            return jsonify({"error": "Email address already in use"}), 400
+            flash("Email address already in use")
+            return redirect(url_for("signup"))
 
         # Insert User in the Database
         if mongo.db.users.insert_one(user):
             return self.start_session(user)
 
-        return jsonify({"error": "Signup Failed"}), 400
+        flash("Signup Failed")
+        return redirect(url_for("signup"))
 
     def login(self):
 
@@ -133,10 +130,12 @@ class User:
         if user and pbkdf2_sha256.verify(request.form.get("password"), user["password"]):
             return self.start_session(user)
 
-        return jsonify({"error": "Invalid username or password"}), 401
+        flash("Signup Failed")
+        return redirect(url_for("login"))
 
     def logout(self):
         session.clear()
+        flash("You have been logged out")
         return redirect(url_for("login"))
 
 

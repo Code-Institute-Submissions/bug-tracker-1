@@ -1,4 +1,4 @@
-{% include 'head.html' %} {% include 'flash_message.html' %}
+{% include 'head.html' %}{% include 'flash_message.html' %}
 <div class="container container-login">
   <div class="card">
     <div class="card-content">
@@ -8,7 +8,7 @@
           alt="Bug Tracker Logo"
         />
       </div>
-      <form name="login_form">
+      <form name="login_form" action="{{ url_for('login') }}" method="POST">
         <div class="row">
           <div class="input-field row">
             <i class="material-icons prefix teal-text">account_circle</i>

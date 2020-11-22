@@ -1,9 +1,4 @@
-{% include 'head.html' %} {% with messages = get_flashed_messages() %} {% if
-messages %} {% for message in messages %}
-<div class="row flashes">
-  <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
-</div>
-{% endfor %} {% endif %} {% endwith %}
+{% include 'head.html' %} {% include 'flash_message.html' %}
 <div class="container">
   <div class="row center-align logo-login">
     <img
@@ -14,7 +9,12 @@ messages %} {% for message in messages %}
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form name="signup_form" class="row">
+        <form
+          name="signup_form"
+          class="row"
+          action="{{ url_for('signup') }}"
+          method="POST"
+        >
           <div class="row">
             <span class="card-title teal-text">Create a new account</span>
           </div>
