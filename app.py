@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template, jsonify,
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from passlib.hash import pbkdf2_sha256
 import uuid
@@ -56,33 +56,42 @@ def forgot_password():
     return render_template("forgot_password.html")
 
 
-@app.route('/edit_user')
-def edit_user():
-    return render_template("edit_user.html")
+@app.route('/edit_profile')
+@login_required
+def edit_profile():
+    return render_template("edit_profile.html")
 
 
-@app.route('/profile')
-def profile():
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
+
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+@login_required
+def profile(username):
+
+    user = mongo.db.users.find_one({'username': username})
     return render_template("profile.html")
 
 
-@app.route('/dashboard')
-@login_required
+@ app.route('/dashboard')
+@ login_required
 def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route('/new_ticket')
+@ app.route('/new_ticket')
 def new_ticket():
     return render_template("new_ticket.html")
 
 
-@app.route('/ticket')
+@ app.route('/ticket')
 def get_ticket():
     return render_template("ticket.html")
 
 
-@app.route('/stats')
+@ app.route('/stats')
 def stats():
     return render_template("stats.html")
 
@@ -90,20 +99,27 @@ def stats():
 class User:
 
     def start_session(self, user):
-        del user["password"]
         session["logged_in"] = True
         session["user"] = user
         return redirect("/dashboard")
 
     def signup(self):
 
+        if "profile_picture" in request.files:
+            profile_picture = request.files["profile_picture"]
+            mongo.save_file(profile_picture.filename, profile_picture)
+        else:
+            profile_picture.filename = ""
+
         # Create User object
         user = {
             "_id": uuid.uuid4().hex,
             "username": request.form.get("username"),
             "name": request.form.get("name"),
+            "dob": request.form.get("dob"),
             "email": request.form.get("email"),
-            "password": request.form.get("password")
+            "password": request.form.get("password"),
+            "profile_picture_name": profile_picture.filename
         }
 
         # Password Encryption.

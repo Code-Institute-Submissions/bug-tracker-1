@@ -4,8 +4,8 @@
     <div class="card card-profile">
       <div class="row center-align profile-picture z-depth-1">
         <img
-          src="{{ url_for('static', filename='images/logo.png') }}"
-          alt="Bug Tracker Logo"
+          src="{{ url_for('file', filename=session['user']['profile_picture_name']) }}"
+          alt="{{session['user']['username']}} Profile Picture"
         />
       </div>
       <div class="card-content">
@@ -20,10 +20,10 @@
                 name="username"
                 type="text"
                 class="validate"
-                placeholder=""
+                placeholder="{{session['user']['username']}}"
                 required
               />
-              <label for="first-name">Username</label>
+              <label for="name">Username</label>
             </div>
             <div class="input-field col s12 m6 l5">
               <input
@@ -31,10 +31,10 @@
                 name="name"
                 type="text"
                 class="validate"
-                placeholder=""
+                placeholder="{{session['user']['name']}}"
                 required
               />
-              <label for="last-name">Name</label>
+              <label for="name">Name</label>
             </div>
             <div class="input-field col s12 m6 l2">
               <input
@@ -42,7 +42,7 @@
                 name="dob"
                 type="text"
                 class="datepicker"
-                placeholder=""
+                placeholder="{{session['user']['dob']}}"
                 required
               />
               <label for="dob">Date of Birth</label>
@@ -55,69 +55,21 @@
                 type="email"
                 name="email"
                 class="validate"
+                placeholder="{{session['user']['email']}}"
                 required
               />
               <label for="email">Email</label>
             </div>
-            <div class="input-field col s12 m6 l6">
-              <input
-                id="confirm-email"
-                name="confirm-email"
-                type="email"
-                class="validate"
-                required
-              />
-              <label for="confirm-email">Confirm Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 m6 l6">
-              <input
-                id="password"
-                type="password"
-                name="password"
-                class="validate"
-                required
-              />
-              <label for="password">Password</label>
-            </div>
-            <div class="input-field col s12 m6 l6">
-              <input
-                id="confirm-password"
-                name="confirm-password"
-                type="password"
-                class="validate"
-                required
-              />
-              <label
-                for="confirm-password"
-                data-error="Password must match"
-                data-success="Password Match"
-                >Confirm Password
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="file-field input-field col s12 m6 l6">
-              <div class="btn">
-                <span>Profile Picture</span>
-                <input type="file" />
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" />
-              </div>
-            </div>
           </div>
           <div class="row right">
             <div class="col">
-              <button
+              <a
                 class="btn waves-effect waves-light"
-                type="submit"
-                name="submit"
+                href="{{ url_for('edit_profile') }}"
               >
-                update
-                <i class="material-icons right">update</i>
-              </button>
+                edit profile
+                <i class="material-icons right">account_circle</i>
+              </a>
             </div>
           </div>
         </form>

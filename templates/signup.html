@@ -14,6 +14,7 @@
           class="row"
           action="{{ url_for('signup') }}"
           method="POST"
+          enctype="multipart/form-data"
         >
           <div class="row">
             <span class="card-title teal-text">Create a new account</span>
@@ -70,6 +71,7 @@
                 type="password"
                 name="password"
                 class="validate"
+                minlength="5"
                 required
               />
               <label for="password">Password</label>
@@ -79,7 +81,11 @@
             <div class="file-field input-field col s12 m6 l6">
               <div class="btn">
                 <span>Profile Picture</span>
-                <input type="file" />
+                <input
+                  type="file"
+                  name="profile_picture"
+                  id="profile_picture"
+                />
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" />

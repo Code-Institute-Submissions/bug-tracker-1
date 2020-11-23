@@ -127,6 +127,10 @@ a:hover {
     background-size: cover;
   }
 
+  .profile-picture > img {
+      max-width: 150px;
+  }
+
 /* ################################# Footer #################################*/
 
 .footer {
