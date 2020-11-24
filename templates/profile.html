@@ -22,61 +22,34 @@
             >
           </div>
           <div class="row">
-            <div class="input-field col s12 m6 l5">
-              <input
-                id="username"
-                name="username"
-                type="text"
-                class="validate"
-                placeholder="{{session['user']['username']}}"
-                required
-              />
-              <label for="name">Username</label>
+            <div class="col s12 m6 l5">
+              <label for="username">Username</label>
+              <p id="username" name="username">
+                {{session['user']['username']}}
+              </p>
             </div>
-            <div class="input-field col s12 m6 l5">
-              <input
-                id="name"
-                name="name"
-                type="text"
-                class="validate"
-                placeholder="{{session['user']['name']}}"
-                required
-              />
+            <div class="col s12 m6 l5">
               <label for="name">Name</label>
+              <p id="name" name="name">{{session['user']['name']}}</p>
             </div>
-            <div class="input-field col s12 m6 l2">
-              <input
-                id="dob"
-                name="dob"
-                type="text"
-                class="datepicker"
-                placeholder="{{session['user']['dob']}}"
-                required
-              />
+            <div class="col s12 m6 l2">
               <label for="dob">Date of Birth</label>
+              <p id="dob" name="dob">{{session['user']['dob']}}</p>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12 m6 l6">
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="validate"
-                placeholder="{{session['user']['email']}}"
-                required
-              />
+            <div class="col s12 m6 l6">
               <label for="email">Email</label>
+              <p id="email" name="email">{{session['user']['email']}}</p>
             </div>
           </div>
           <div class="row right">
             <div class="col">
               <a
                 class="btn waves-effect waves-light"
-                href="{{ url_for('edit_profile') }}"
+                href="{{ url_for('edit_profile', username=session['user']['username']) }}"
               >
                 edit profile
-                <i class="material-icons right">account_circle</i>
               </a>
             </div>
           </div>

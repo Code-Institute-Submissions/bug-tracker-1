@@ -56,9 +56,36 @@ def forgot_password():
     return render_template("forgot_password.html")
 
 
-@app.route('/edit_profile')
+@app.route('/edit_profile/<username>', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
+def edit_profile(username):
+
+    if request.method == 'GET':
+        return render_template("edit_profile.html")
+
+    if "profile_picture" in request.files:
+        profile_picture = request.files["profile_picture"]
+        mongo.save_file(profile_picture.filename, profile_picture)
+    else:
+        profile_picture.filename = ""
+
+    user = {
+        "username": request.form["username"],
+        "name": request.form["name"],
+        "email": request.form["email"],
+        "dob": request.form["dob"],
+        "password": request.form["password"],
+        "profile_picture_name": profile_picture.filename
+    }
+
+    dbResponse = mongo.db.users.update_one(
+        {'username': username},
+        {"$set": user})
+
+    if dbResponse.modified_count == 1:
+        flash("Profile updated successfully")
+        User().start_session(user)
+
     return render_template("edit_profile.html")
 
 
@@ -70,8 +97,6 @@ def file(filename):
 @app.route("/profile/<username>", methods=["GET", "POST"])
 @login_required
 def profile(username):
-
-    user = mongo.db.users.find_one({'username': username})
     return render_template("profile.html")
 
 

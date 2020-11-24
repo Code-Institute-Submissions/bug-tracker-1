@@ -1,31 +1,41 @@
-{% include 'head.html' %} {% include 'navbar.html' %}
+{% include 'head.html' %} {% include 'navbar.html' %} {% include
+'flash_message.html' %}
 <div class="container container-tickets">
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form class="row">
+        <div class="row center-align profile-picture z-depth-1">
+          {% if session['user']['profile_picture_name'] != "" %}
+          <img
+            src="{{ url_for('file', filename=session['user']['profile_picture_name']) }}"
+            alt="{{session['user']['username']}} Profile Picture"
+          />
+          {% endif %}
+          <img
+            src="{{ url_for('static', filename='images/avatar.svg') }}"
+            alt="{{session['user']['username']}} Profile Picture"
+          />
+        </div>
+        <form
+          class="row"
+          action="{{ url_for('edit_profile', username=session['user']['username']) }}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           <div class="row">
-            <span class="card-title teal-text">User Management</span>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 l5">
-              <input type="text" id="search-user" name="search-user" />
-              <label for="search-user"
-                ><i class="fas fa-search"></i> User Search</label
-              >
-            </div>
+            <span class="card-title teal-text">Edit Profile</span>
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l5">
               <input
-                id="Username"
-                name="Username"
+                id="username"
+                name="username"
                 type="text"
                 class="validate"
-                placeholder=""
+                value="{{session['user']['username']}}"
                 required
               />
-              <label for="first-name">Username</label>
+              <label for="username">Username</label>
             </div>
             <div class="input-field col s12 m6 l5">
               <input
@@ -33,10 +43,10 @@
                 name="name"
                 type="text"
                 class="validate"
-                placeholder=""
+                value="{{session['user']['name']}}"
                 required
               />
-              <label for="last-name">Name</label>
+              <label for="name">Name</label>
             </div>
             <div class="input-field col s12 m6 l2">
               <input
@@ -44,7 +54,7 @@
                 name="dob"
                 type="text"
                 class="datepicker"
-                placeholder=""
+                value="{{session['user']['dob']}}"
                 required
               />
               <label for="dob">Date of Birth</label>
@@ -57,29 +67,39 @@
                 type="email"
                 name="email"
                 class="validate"
+                value="{{session['user']['email']}}"
                 required
               />
               <label for="email">Email</label>
             </div>
             <div class="input-field col s12 m6 l6">
               <input
-                id="confirm-email"
-                name="confirm-email"
-                type="email"
+                id="password"
+                name="password"
+                type="password"
                 class="validate"
+                value="{{session['user']['password']}}"
                 required
               />
-              <label for="confirm-email">Confirm Email</label>
+              <label for="password">Password</label>
             </div>
           </div>
           <div class="row">
             <div class="file-field input-field col s12 m6 l6">
               <div class="btn">
                 <span>Profile Picture</span>
-                <input type="file" />
+                <input
+                  type="file"
+                  name="profile_picture"
+                  id="profile_picture"
+                />
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" />
+                <input
+                  class="file-path validate"
+                  type="text"
+                  value="{{ session['user']['profile_picture_name'] }}"
+                />
               </div>
             </div>
           </div>
@@ -87,20 +107,10 @@
             <div class="col">
               <button
                 class="btn waves-effect waves-light"
-                type="reset"
-                name="reset"
-              >
-                clear
-                <i class="material-icons right">clear</i>
-              </button>
-            </div>
-            <div class="col">
-              <button
-                class="btn waves-effect waves-light"
                 type="submit"
                 name="delete"
               >
-                delete
+                Close Account
                 <i class="material-icons right">delete</i>
               </button>
             </div>
