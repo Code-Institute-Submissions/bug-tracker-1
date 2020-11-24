@@ -1,34 +1,35 @@
-{% include 'head.html' %} {% include 'navbar.html' %}
+{% include 'head.html' %} {% include 'navbar.html' %} {% include
+'flash_message.html' %}
 <div class="container container-tickets">
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form class="row">
+        <form class="row" method="POST" action="{{ url_for('new_ticket') }}">
           <div class="row">
             <span class="card-title teal-text">New Ticket</span>
           </div>
           <div class="row">
             <div class="input-field col s12 l5">
               <input
-                id="ticket-title"
-                name="ticket-title"
+                id="title"
+                name="title"
                 type="text"
                 class="validate"
                 placeholder=""
                 required
               />
-              <label for="ticket-title">Ticket Title</label>
+              <label for="title">Ticket Title</label>
             </div>
             <div class="input-field col s12 l4">
               <input
-                id="due-date"
-                name="due-date"
+                id="due_date"
+                name="due_date"
                 type="text"
                 class="datepicker"
                 placeholder=""
                 required
               />
-              <label for="due-date">Due Date</label>
+              <label for="due_date">Due Date</label>
             </div>
           </div>
           <div class="row">
@@ -61,7 +62,7 @@
               <div class="input-field col s12 m4 l2 right">
                 <div class="switch">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" name="is_urgent" id="is_urgent" />
                     <span class="lever"></span>
                     Urgent
                   </label>

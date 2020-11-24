@@ -6,6 +6,7 @@ from passlib.hash import pbkdf2_sha256
 import uuid
 from flask_pymongo import PyMongo
 from functools import wraps
+from datetime import date
 if os.path.exists("env.py"):
     import env
 
@@ -51,42 +52,13 @@ def signup():
         return User().signup()
 
 
-@app.route('/forgot_password')
-def forgot_password():
-    return render_template("forgot_password.html")
-
-
 @app.route('/edit_profile/<username>', methods=['GET', 'POST'])
 @login_required
 def edit_profile(username):
-
-    if request.method == 'GET':
+    if request.method == "GET":
         return render_template("edit_profile.html")
-
-    if "profile_picture" in request.files:
-        profile_picture = request.files["profile_picture"]
-        mongo.save_file(profile_picture.filename, profile_picture)
     else:
-        profile_picture.filename = ""
-
-    user = {
-        "username": request.form["username"],
-        "name": request.form["name"],
-        "email": request.form["email"],
-        "dob": request.form["dob"],
-        "password": request.form["password"],
-        "profile_picture_name": profile_picture.filename
-    }
-
-    dbResponse = mongo.db.users.update_one(
-        {'username': username},
-        {"$set": user})
-
-    if dbResponse.modified_count == 1:
-        flash("Profile updated successfully")
-        User().start_session(user)
-
-    return render_template("edit_profile.html")
+        return User().edit_profile(username)
 
 
 @app.route('/file/<filename>')
@@ -103,12 +75,16 @@ def profile(username):
 @ app.route('/dashboard')
 @ login_required
 def dashboard():
-    return render_template("dashboard.html")
+    tickets = Ticket().get_tickets()
+    return render_template("dashboard.html", tickets=tickets)
 
 
-@ app.route('/new_ticket')
+@ app.route('/new_ticket', methods=['GET', 'POST'])
 def new_ticket():
-    return render_template("new_ticket.html")
+    if request.method == "GET":
+        return render_template("new_ticket.html")
+    else:
+        return Ticket().new_ticket()
 
 
 @ app.route('/ticket')
@@ -151,8 +127,8 @@ class User:
         user["password"] = pbkdf2_sha256.encrypt(user["password"])
 
         # Check for duplicates.
-        if mongo.db.users.find_one({"email": user["email"]}):
-            flash("Email address already in use")
+        if mongo.db.users.find_one({"username": user["username"]}):
+            flash("Username address already in use")
             return redirect(url_for("signup"))
 
         # Insert User in the Database
@@ -178,6 +154,67 @@ class User:
         session.clear()
         flash("You have been logged out")
         return redirect(url_for("login"))
+
+    def edit_profile(self, username):
+
+        if "profile_picture" in request.files:
+            profile_picture = request.files["profile_picture"]
+            mongo.save_file(profile_picture.filename, profile_picture)
+        else:
+            profile_picture.filename = ""
+
+        user = {
+            "username": username,
+            "name": request.form["name"],
+            "email": request.form["email"],
+            "dob": request.form["dob"],
+            "password": request.form["password"],
+            "profile_picture_name": profile_picture.filename
+        }
+
+        dbResponse = mongo.db.users.update_one(
+            {'username': username},
+            {"$set": user})
+
+        if dbResponse.modified_count == 1:
+            flash("Profile updated successfully")
+            User().start_session(user)
+
+        return render_template("edit_profile.html")
+
+
+class Ticket:
+    def new_ticket(self):
+        date_created = date.today().strftime("%b %d, %Y")
+
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+
+        if mongo.db.tickets.count() == 0:
+            ticket_number = 1
+        else:
+            ticket_number = mongo.db.tickets.count() + 1
+
+        ticket = {
+            "_id": uuid.uuid4().hex,
+            "ticket_number": ticket_number,
+            "title": request.form["title"],
+            "status": "open",
+            "date_created": date_created,
+            "due_date": request.form["due_date"],
+            "submited_by": session["user"]["username"],
+            "is_urgent": is_urgent,
+            "description": request.form["description"]
+        }
+
+        if mongo.db.tickets.insert_one(ticket):
+            flash("Ticket created successfully.")
+            return redirect("/dashboard")
+
+        flash("Ticket creation failed.")
+
+    def get_tickets(self):
+        tickets = list(mongo.db.tickets.find())
+        return tickets
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
-{% include 'head.html' %} {% include 'navbar.html' %}
+{% include 'head.html' %} {% include 'navbar.html' %} {% include
+'flash_message.html' %}
 <section>
   <div class="row">
     <!-- Tabs -->
@@ -28,10 +29,13 @@
       </ul>
       <!-- Collapsible -->
       <div class="tickets-wrapper">
+        {% if tickets|length > 0 %}
         <ul class="collapsible">
+          {% for ticket in tickets %}
           <li>
             <div class="collapsible-header">
-              <i class="material-icons">article</i>Ticket #1
+              <i class="material-icons">article</i>
+              Ticket #{{ticket.ticket_number}}
               <div class="arrow-collapsible">
                 <i class="material-icons">keyboard_arrow_down</i>
               </div>
@@ -40,17 +44,11 @@
               <div class="card">
                 <div class="card-content">
                   <div class="row">
-                    <div class="chip">Created: 20/20/2020</div>
-                    <div class="chip">Due: 30/30/3030</div>
+                    <div class="chip">Created: {{ticket.date_created}}</div>
+                    <div class="chip">Due: {{ticket.due_date}}</div>
                   </div>
                   <div class="row">
-                    <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Necessitatibus architecto ratione totam sed molestiae
-                      velit soluta deleniti consequuntur culpa, dolores qui!
-                      Modi error enim nemo, recusandae adipisci iste ducimus
-                      illo.
-                    </p>
+                    <p>{{ticket.description}}</p>
                   </div>
                   <div class="row">
                     <a
@@ -64,7 +62,9 @@
               </div>
             </div>
           </li>
+          {% endfor %}
         </ul>
+        {% endif %}
       </div>
     </div>
   </div>
