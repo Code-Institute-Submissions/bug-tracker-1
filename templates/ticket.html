@@ -1,56 +1,63 @@
-{% include 'head.html' %} {% include 'navbar.html' %}
+{% include 'head.html' %} {% include 'navbar.html' %} {% include
+'flash_message.html' %}
 <div class="container container-tickets">
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form class="row">
+        <form
+          class="row"
+          method="POST"
+          action="{{ url_for('update_ticket_status', ticket_id=ticket._id) }}"
+        >
           <div class="row">
-            <span class="card-title teal-text">Ticket #1</span>
+            <span class="card-title teal-text"
+              >Ticket #{{ticket.ticket_number}}</span
+            >
           </div>
           <div class="row">
             <div class="col s6 l6">
               <label>Ticket Title</label>
-              <p>Unable to attach file</p>
+              <p>{{ticket.title}}</p>
             </div>
             <div class="col s6 l6">
               <label>Created By:</label>
-              <p>Thiago Hardt</p>
+              <p>{{ticket.submited_by}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col s6 l6">
               <label>Date Created</label>
-              <p>20/20/2020</p>
+              <p>{{ticket.date_created}}</p>
             </div>
             <div class="col s6 l6">
               <label>Due Date</label>
-              <p>30/30/3030</p>
+              <p>{{ticket.due_date}}</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col s6 m6 l6">
               <label>Priority</label>
+              {% if ticket.is_urgent == "on" %}
               <p>Urgent</p>
+              {% else %}
+              <p>Normal</p>
+              {% endif %}
             </div>
             <div class="col s6 m4 l3">
-              <select disabled>
-                <option value="1" selected>Open</option>
-                <option value="2">In Progress</option>
-                <option value="3">Resolved</option>
-                <option value="4">On Hold</option>
+              <select name="ticket_status" id="ticket_status">
+                <option selected disabled>{{ticket.status}}</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+                <option value="On Hold">On Hold</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col s12 l12">
               <label>Description</label>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque
-                dolor excepturi non commodi, accusantium totam mollitia ex
-                aliquam fugiat pariatur possimus nemo perspiciatis esse,
-                aspernatur harum fuga, in impedit voluptas.
-              </p>
+              <p>{{ticket.description}}</p>
             </div>
           </div>
           <div class="row">
@@ -58,22 +65,24 @@
               <label>Attachments</label>
               <div class="card">
                 <div class="card-action">
-                  <a href="http://">image.jpg</a>
-                  <a href="http://">image.jpg</a>
+                  <a
+                    href="{{ url_for('file', filename=ticket.attachment_name) }}"
+                    target="_blank"
+                    >{{ticket.attachment_name}}</a
+                  >
                 </div>
               </div>
             </div>
           </div>
           <div class="row right">
             <div class="col">
-              <button
+              <a
                 class="btn waves-effect waves-light"
-                type="submit"
-                name="submit"
+                href="{{ url_for('delete_ticket', ticket_id=ticket._id) }}"
               >
                 delete
                 <i class="material-icons right">delete</i>
-              </button>
+              </a>
             </div>
             <div class="col">
               <button

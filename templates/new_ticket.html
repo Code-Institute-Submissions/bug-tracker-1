@@ -4,7 +4,12 @@
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <form class="row" method="POST" action="{{ url_for('new_ticket') }}">
+        <form
+          class="row"
+          method="POST"
+          enctype="multipart/form-data"
+          action="{{ url_for('new_ticket') }}"
+        >
           <div class="row">
             <span class="card-title teal-text">New Ticket</span>
           </div>
@@ -48,13 +53,13 @@
                 <div class="file-field input-field">
                   <div class="btn waves-effect waves-light">
                     <span>File</span>
-                    <input type="file" multiple />
+                    <input type="file" id="attachment" name="attachment" />
                   </div>
                   <div class="file-path-wrapper">
                     <input
                       class="file-path validate"
                       type="text"
-                      placeholder="Upload one or more files"
+                      placeholder="Upload an attachment file"
                     />
                   </div>
                 </div>

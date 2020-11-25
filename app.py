@@ -62,6 +62,7 @@ def edit_profile(username):
 
 
 @app.route('/file/<filename>')
+@login_required
 def file(filename):
     return mongo.send_file(filename)
 
@@ -72,14 +73,15 @@ def profile(username):
     return render_template("profile.html")
 
 
-@ app.route('/dashboard')
-@ login_required
+@app.route('/dashboard')
+@login_required
 def dashboard():
     tickets = Ticket().get_tickets()
     return render_template("dashboard.html", tickets=tickets)
 
 
-@ app.route('/new_ticket', methods=['GET', 'POST'])
+@app.route('/new_ticket', methods=['GET', 'POST'])
+@login_required
 def new_ticket():
     if request.method == "GET":
         return render_template("new_ticket.html")
@@ -87,12 +89,27 @@ def new_ticket():
         return Ticket().new_ticket()
 
 
-@ app.route('/ticket')
-def get_ticket():
-    return render_template("ticket.html")
+@app.route('/ticket/<ticket_id>', methods=['GET', 'POST'])
+@login_required
+def get_ticket_details(ticket_id):
+
+    return Ticket().get_ticket_details(ticket_id=ticket_id)
 
 
-@ app.route('/stats')
+@app.route('/ticket/update/<ticket_id>', methods=['GET', 'POST'])
+@login_required
+def update_ticket_status(ticket_id):
+    return Ticket().update_ticket_status(ticket_id=ticket_id)
+
+
+@app.route('/ticket/delete/<ticket_id>', methods=['GET', 'POST'])
+@login_required
+def delete_ticket(ticket_id):
+    return Ticket().delete_ticket(ticket_id=ticket_id)
+
+
+@app.route('/stats')
+@login_required
 def stats():
     return render_template("stats.html")
 
@@ -185,6 +202,11 @@ class User:
 
 class Ticket:
     def new_ticket(self):
+
+        if "attachment" in request.files:
+            attachment = request.files["attachment"]
+            mongo.save_file(attachment.filename, attachment)
+
         date_created = date.today().strftime("%b %d, %Y")
 
         is_urgent = "on" if request.form.get("is_urgent") else "off"
@@ -198,12 +220,13 @@ class Ticket:
             "_id": uuid.uuid4().hex,
             "ticket_number": ticket_number,
             "title": request.form["title"],
-            "status": "open",
+            "status": "Open",
             "date_created": date_created,
             "due_date": request.form["due_date"],
             "submited_by": session["user"]["username"],
             "is_urgent": is_urgent,
-            "description": request.form["description"]
+            "description": request.form["description"],
+            "attachment_name": attachment.filename,
         }
 
         if mongo.db.tickets.insert_one(ticket):
@@ -215,6 +238,28 @@ class Ticket:
     def get_tickets(self):
         tickets = list(mongo.db.tickets.find())
         return tickets
+
+    def get_ticket_details(self, ticket_id):
+        ticket = mongo.db.tickets.find_one({"_id": ticket_id})
+        return render_template('ticket.html', ticket=ticket)
+
+    def update_ticket_status(self, ticket_id):
+        dbResponse = mongo.db.tickets.update_one(
+            {'_id': ticket_id},
+            {"$set": {"status": request.form["ticket_status"]}})
+
+        if dbResponse.modified_count == 1:
+            flash(("Ticket Status Updated Successfully"))
+            ticket = mongo.db.tickets.find_one({"_id": ticket_id})
+            return render_template('ticket.html', ticket=ticket)
+
+        flash(("Failed to update ticket."))
+        return render_template('ticket.html', ticket=ticket)
+
+    def delete_ticket(self, ticket_id):
+        mongo.db.tickets.remove({"_id": ticket_id})
+        flash("Ticket deleted successfully.")
+        return redirect("/dashboard")
 
 
 if __name__ == "__main__":
