@@ -61,6 +61,12 @@ def edit_profile(username):
         return User().edit_profile(username)
 
 
+@app.route('/delete/user/<user_id>', methods=['GET', 'POST'])
+@login_required
+def delete_user(user_id):
+    return User().delete_user(user_id=user_id)
+
+
 @app.route('/file/<filename>')
 @login_required
 def file(filename):
@@ -198,6 +204,11 @@ class User:
             User().start_session(user)
 
         return render_template("edit_profile.html")
+
+    def delete_user(self, user_id):
+        mongo.db.users.remove({"_id": user_id})
+        flash("Account deleted successfully.")
+        return redirect("/login")
 
 
 class Ticket:

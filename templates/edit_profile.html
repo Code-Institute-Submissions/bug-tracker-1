@@ -90,14 +90,13 @@
           </div>
           <div class="row right">
             <div class="col">
-              <button
+              <a
                 class="btn waves-effect waves-light"
-                type="submit"
-                name="delete"
+                href="{{ url_for('delete_user', user_id=session['user']['_id']) }}"
               >
-                Close Account
+                Delete Account
                 <i class="material-icons right">delete</i>
-              </button>
+              </a>
             </div>
             <div class="col">
               <button
