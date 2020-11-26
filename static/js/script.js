@@ -9,6 +9,7 @@ $(document).ready(function () {
     $('.tabs').tabs();
     $('select').formSelect();
     $('.carousel').carousel();
+    $('.modal').modal();
     $("#due_date").datepicker({
       minDate: date
     });

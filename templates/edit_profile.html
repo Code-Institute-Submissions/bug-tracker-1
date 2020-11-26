@@ -10,11 +10,12 @@
             src="{{ url_for('file', filename=session['user']['profile_picture_name']) }}"
             alt="{{session['user']['username']}} Profile Picture"
           />
-          {% endif %}
+          {% else %}
           <img
             src="{{ url_for('static', filename='images/avatar.svg') }}"
             alt="{{session['user']['username']}} Profile Picture"
           />
+          {% endif %}
         </div>
         <form
           class="row"
@@ -91,14 +92,12 @@
           <div class="row right">
             <div class="col">
               <a
-                class="btn waves-effect waves-light"
-                href="{{ url_for('delete_user', user_id=session['user']['_id']) }}"
+                class="btn waves-effect waves-light modal-trigger"
+                href="#modal_account"
               >
                 Delete Account
                 <i class="material-icons right">delete</i>
               </a>
-            </div>
-            <div class="col">
               <button
                 class="btn waves-effect waves-light"
                 type="submit"
@@ -110,6 +109,24 @@
             </div>
           </div>
         </form>
+
+        <!-- Delete Account Modal -->
+        <div id="modal_account" class="modal">
+          <div class="modal-content">
+            <h4>Are you sure?</h4>
+            <p>
+              Do you really want to delete your account? This can't be undone.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="{{ url_for('delete_user', user_id=session['user']['_id']) }}"
+              class="modal-close waves-effect waves-green btn-flat"
+              >Confirm</a
+            >
+            <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

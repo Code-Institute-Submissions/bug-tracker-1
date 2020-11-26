@@ -77,8 +77,8 @@
           <div class="row right">
             <div class="col">
               <a
-                class="btn waves-effect waves-light"
-                href="{{ url_for('delete_ticket', ticket_id=ticket._id) }}"
+                class="btn waves-effect waves-light modal-trigger"
+                href="#modal_ticket"
               >
                 delete
                 <i class="material-icons right">delete</i>
@@ -96,6 +96,23 @@
             </div>
           </div>
         </form>
+        <!-- Delete Ticket Modal -->
+        <div id="modal_ticket" class="modal">
+          <div class="modal-content">
+            <h4>Are you sure?</h4>
+            <p>
+              Do you really want to delete this ticket? This can't be undone.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="{{ url_for('delete_ticket', ticket_id=ticket._id) }}"
+              class="modal-close waves-effect waves-green btn-flat"
+              >Confirm</a
+            >
+            <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
