@@ -1,0 +1,172 @@
+<div class="tickets-wrapper">
+  {% if tickets|length > 0 %}
+
+  <ul class="collapsible" id="open_tab">
+    {% for ticket in tickets %} {%if ticket.status == 'Open' %}
+    <li>
+      <div class="collapsible-header" id="tab_header">
+        <i class="material-icons">article</i>
+        Ticket #{{ticket.ticket_number}}
+        <div class="arrow-collapsible">
+          <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      <div
+        class="collapsible-body teal lighten-2"
+        aria-labelledby="tab_header"
+        data-parent="#open_tab"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div class="row">
+              <span class="card-title teal-text">{{ticket.title}}</span>
+            </div>
+            <div class="row">
+              <div class="chip">Created: {{ticket.date_created}}</div>
+              <div class="chip">Due: {{ticket.due_date}}</div>
+            </div>
+            <div class="row">
+              <p class="ticket-description">{{ticket.description}}</p>
+            </div>
+            <div class="row">
+              <a
+                class="waves-effect waves-light btn right"
+                href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
+                target="_blank"
+                >Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  <!-- In Progress Tab -->
+  <ul class="collapsible" id="in_progress_tab">
+    {% for ticket in tickets %} {%if ticket.status == 'In Progress' %}
+    <li>
+      <div class="collapsible-header" id="tab_header">
+        <i class="material-icons">article</i>
+        Ticket #{{ticket.ticket_number}}
+        <div class="arrow-collapsible">
+          <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      <div
+        class="collapsible-body teal lighten-2"
+        aria-labelledby="tab_header"
+        data-parent="#in_progress_tab"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div class="row">
+              <span class="card-title teal-text">{{ticket.title}}</span>
+            </div>
+            <div class="row">
+              <div class="chip">Created: {{ticket.date_created}}</div>
+              <div class="chip">Due: {{ticket.due_date}}</div>
+            </div>
+            <div class="row">
+              <p class="ticket-description">{{ticket.description}}</p>
+            </div>
+            <div class="row">
+              <a
+                class="waves-effect waves-light btn right"
+                href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
+                target="_blank"
+                >Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  <!-- Resolved Tab -->
+  <ul class="collapsible" id="resolved_tab">
+    {% for ticket in tickets %} {%if ticket.status == 'Resolved' %}
+    <li>
+      <div class="collapsible-header" id="tab_header">
+        <i class="material-icons">article</i>
+        Ticket #{{ticket.ticket_number}}
+        <div class="arrow-collapsible">
+          <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      <div
+        class="collapsible-body teal lighten-2"
+        aria-labelledby="tab_header"
+        data-parent="#resolved_tab"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div class="row">
+              <span class="card-title teal-text">{{ticket.title}}</span>
+            </div>
+            <div class="row">
+              <div class="chip">Created: {{ticket.date_created}}</div>
+              <div class="chip">Due: {{ticket.due_date}}</div>
+            </div>
+            <div class="row">
+              <p class="ticket-description">{{ticket.description}}</p>
+            </div>
+            <div class="row">
+              <a
+                class="waves-effect waves-light btn right"
+                href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
+                target="_blank"
+                >Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  <!-- On Hold Tab -->
+  <ul class="collapsible" id="on_hold_tab">
+    {% for ticket in tickets %} {%if ticket.status == 'On Hold' %}
+    <li>
+      <div class="collapsible-header" id="tab_header">
+        <i class="material-icons">article</i>
+        Ticket #{{ticket.ticket_number}}
+        <div class="arrow-collapsible">
+          <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      <div
+        class="collapsible-body teal lighten-2"
+        aria-labelledby="tab_header"
+        data-parent="#on_hold_tab"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div class="row">
+              <span class="card-title teal-text">{{ticket.title}}</span>
+            </div>
+            <div class="row">
+              <div class="chip">Created: {{ticket.date_created}}</div>
+              <div class="chip">Due: {{ticket.due_date}}</div>
+            </div>
+            <div class="row">
+              <p class="ticket-description">{{ticket.description}}</p>
+            </div>
+            <div class="row">
+              <a
+                class="waves-effect waves-light btn right"
+                href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
+                target="_blank"
+                >Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  {% endif %}
+</div>

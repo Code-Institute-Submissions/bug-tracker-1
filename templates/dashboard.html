@@ -15,57 +15,44 @@
           />
         </li>
         <li class="tab col s2">
-          <a href="#test1">Open</a>
+          <a
+            href="#open_tab"
+            data-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="Show open tickets"
+            >Open</a
+          >
         </li>
         <li class="tab col s2">
-          <a href="#test1">In Progress</a>
+          <a
+            href="#in_progress_tab"
+            data-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="Show tickets in progress"
+            >In Progress</a
+          >
         </li>
         <li class="tab col s2">
-          <a href="#test1">Resolved</a>
+          <a
+            href="#resolved_tab"
+            data-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="Show resolved tickets"
+            >Resolved</a
+          >
         </li>
         <li class="tab col s2">
-          <a href="#test1">On Hold</a>
+          <a
+            href="#on_hold_tab"
+            data-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="Show tickets on hold"
+            >On Hold</a
+          >
         </li>
       </ul>
       <!-- Collapsible -->
-      <div class="tickets-wrapper">
-        {% if tickets|length > 0 %}
-        <ul class="collapsible">
-          {% for ticket in tickets %}
-          <li>
-            <div class="collapsible-header">
-              <i class="material-icons">article</i>
-              Ticket #{{ticket.ticket_number}}
-              <div class="arrow-collapsible">
-                <i class="material-icons">keyboard_arrow_down</i>
-              </div>
-            </div>
-            <div class="collapsible-body teal lighten-2">
-              <div class="card">
-                <div class="card-content">
-                  <div class="row">
-                    <div class="chip">Created: {{ticket.date_created}}</div>
-                    <div class="chip">Due: {{ticket.due_date}}</div>
-                  </div>
-                  <div class="row">
-                    <p>{{ticket.description}}</p>
-                  </div>
-                  <div class="row">
-                    <a
-                      class="waves-effect waves-light btn right"
-                      href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
-                      target="_blank"
-                      >Details</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </div>
+      {% include "collapsible_tickets.html" %}
     </div>
   </div>
 </section>
