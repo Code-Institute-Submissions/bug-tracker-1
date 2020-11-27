@@ -39,6 +39,11 @@ def login():
     return User().login()
 
 
+@app.route("/demo_login", methods=["GET", "POST"])
+def demo_login():
+    return User().demo_login()
+
+
 @app.route("/logout")
 def logout():
     return User().logout()
@@ -217,6 +222,10 @@ class User:
         mongo.db.users.remove({"_id": user_id})
         flash("Account deleted successfully.")
         return redirect("/login")
+
+    def demo_login(self):
+        user = mongo.db.users.find_one({"username": "Demo"})
+        self.start_session(user)
 
 
 class Ticket:
