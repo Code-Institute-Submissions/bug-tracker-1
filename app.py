@@ -225,7 +225,7 @@ class User:
 
     def demo_login(self):
         user = mongo.db.users.find_one({"username": "Demo"})
-        self.start_session(user)
+        return self.start_session(user)
 
 
 class Ticket:
@@ -235,7 +235,7 @@ class Ticket:
             attachment = request.files["attachment"]
             mongo.save_file(attachment.filename, attachment)
 
-        date_created = date.today().strftime("%m/%d/%Y")
+        date_created = date.today().strftime("%d/%m/%Y")
 
         is_urgent = "on" if request.form.get("is_urgent") else "off"
 

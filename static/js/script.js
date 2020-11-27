@@ -12,7 +12,11 @@ $(document).ready(function () {
   $('.modal').modal();
   $("#due_date").datepicker({
     format: 'dd/mm/yyyy',
-    minDate: date
+    minDate: date,
+    showClearBtn: true,
+    i18n: {
+        done: "Select"
+    }
   });
   $("#dob").datepicker({
     format: 'dd/mm/yyyy',
@@ -30,13 +34,12 @@ $(document).ready(function () {
     });
   });
 
-  // Custom date validation method
-  $.validator.addMethod("anyDate",
-    function(value, element) {
-        return value.match(/^(0?[1-9]|[12][0-9]|4[0-1])[/., -](0?[1-9]|1[0-2])[/., -](19|20)?\d{2}$/);
-    },
-    "Please enter a valid date."
-  );
+  $(function() {
+    $('.datepicker').keypress(function(event) {
+         event.preventDefault();
+        return false;
+    });
+  });
 
   // Signup Form Validation
   $("#signup_form").validate({
@@ -48,8 +51,7 @@ $(document).ready(function () {
             required: true,
         },
         dob: {
-          required: true,
-          anyDate: true
+          required: true
         },
         email: {
             required: true,
@@ -85,8 +87,7 @@ $(document).ready(function () {
             required: true,
         },
         dob: {
-          required: true,
-          anyDate:true
+          required: true
         },
         email: {
             required: true,
@@ -122,19 +123,18 @@ $(document).ready(function () {
           required: true,
       },
       due_date: {
-        required: true,
-        anyDate:true
+        required: true
       },
       description: {
           required: true
       },
       attachment: {
-          extension: "pdf, jpeg, jpg, png, gif"
+          accept: "image/*"
       },
     },
     messages: {
       attachment: {
-        extension: "Only images or PDF attachments are accepted."
+        accept: "Only images are accepted."
       }
     },
     errorElement : 'div',
