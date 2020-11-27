@@ -180,6 +180,14 @@ class User:
 
     def edit_profile(self, username):
 
+        currentUser = mongo.db.users.find_one({'username': username})
+        newPassword = currentUser["password"]
+        if pbkdf2_sha256.verify(request.form["password"], currentUser["password"]) == False:
+            if request.form["password"] == "":
+                newPassword = (currentUser["password"])
+            else:
+                newPassword = pbkdf2_sha256.hash(request.form["password"])
+
         if "profile_picture" in request.files:
             profile_picture = request.files["profile_picture"]
             mongo.save_file(profile_picture.filename, profile_picture)
@@ -191,7 +199,7 @@ class User:
             "name": request.form["name"],
             "email": request.form["email"],
             "dob": request.form["dob"],
-            "password": request.form["password"],
+            "password": newPassword,
             "profile_picture_name": profile_picture.filename
         }
 
