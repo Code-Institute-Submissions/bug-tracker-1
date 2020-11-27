@@ -29,6 +29,11 @@ a:hover {
     max-width: 900px;
 }
 
+.error {
+    font-size: 12px;
+    color: #F44336;
+}
+
 /* ################################# Navbar #################################*/
 
 .navbar-logo {

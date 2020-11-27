@@ -10,6 +10,7 @@
     <div class="card">
       <div class="card-content">
         <form
+          id="signup_form"
           name="signup_form"
           class="row"
           action="{{ url_for('signup') }}"
@@ -86,9 +87,10 @@
                   name="profile_picture"
                   id="profile_picture"
                 />
+                <label for="profile_picture"></label>
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" />
+                <input class="file-path validate" type="text" value="" />
               </div>
             </div>
           </div>

@@ -170,7 +170,7 @@ class User:
         if user and pbkdf2_sha256.verify(request.form.get("password"), user["password"]):
             return self.start_session(user)
 
-        flash("Signup Failed")
+        flash("Wrong username or password.")
         return redirect(url_for("login"))
 
     def logout(self):
@@ -226,7 +226,7 @@ class Ticket:
             attachment = request.files["attachment"]
             mongo.save_file(attachment.filename, attachment)
 
-        date_created = date.today().strftime("%b %d, %Y")
+        date_created = date.today().strftime("%m/%d/%Y")
 
         is_urgent = "on" if request.form.get("is_urgent") else "off"
 

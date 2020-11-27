@@ -22,6 +22,7 @@
           action="{{ url_for('edit_profile', username=session['user']['username']) }}"
           method="POST"
           enctype="multipart/form-data"
+          id="edit_profile_form"
         >
           <div class="row">
             <span class="card-title teal-text">Edit Profile</span>
@@ -32,9 +33,7 @@
                 id="name"
                 name="name"
                 type="text"
-                class="validate"
-                value="{{session['user']['name']}}"
-                required
+                value=" {{session['user']['name']}} "
               />
               <label for="name">Name</label>
             </div>
@@ -75,8 +74,8 @@
           </div>
           <div class="row">
             <div class="file-field input-field col s12 m6 l6">
-              <div class="btn">
-                <span>Profile Picture</span>
+              <div class="btn waves-effect waves-light">
+                <span>Profile Image</span>
                 <input
                   type="file"
                   name="profile_picture"
@@ -84,7 +83,7 @@
                 />
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" value="" />
+                <input class="file-path" type="text" value="" />
               </div>
             </div>
           </div>
@@ -94,7 +93,7 @@
                 class="btn waves-effect waves-light modal-trigger"
                 href="#modal_account"
               >
-                Delete Account
+                Delete
                 <i class="material-icons right">delete</i>
               </a>
               <button
