@@ -2,7 +2,8 @@
   {% if tickets|length > 0 %}
 
   <ul class="collapsible" id="open_tab">
-    {% for ticket in tickets %} {%if ticket.status == 'Open' %}
+    {% for ticket in tickets %} {%if (ticket.status == 'Open') and
+    (ticket.submited_by == session["user"]["username"]) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -44,7 +45,8 @@
   </ul>
   <!-- In Progress Tab -->
   <ul class="collapsible" id="in_progress_tab">
-    {% for ticket in tickets %} {%if ticket.status == 'In Progress' %}
+    {% for ticket in tickets %} {%if (ticket.status == 'In Progress') and
+    (ticket.submited_by == session["user"]["username"]) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -86,7 +88,8 @@
   </ul>
   <!-- Resolved Tab -->
   <ul class="collapsible" id="resolved_tab">
-    {% for ticket in tickets %} {%if ticket.status == 'Resolved' %}
+    {% for ticket in tickets %} {%if (ticket.status == 'Resolved') and
+    (ticket.submited_by == session["user"]["username"]) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -128,7 +131,8 @@
   </ul>
   <!-- On Hold Tab -->
   <ul class="collapsible" id="on_hold_tab">
-    {% for ticket in tickets %} {%if ticket.status == 'On Hold' %}
+    {% for ticket in tickets %} {%if (ticket.status == 'On Hold') and
+    (ticket.submited_by == session["user"]["username"]) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
