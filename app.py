@@ -1,12 +1,13 @@
 import os
 from flask import (
-    Flask, flash, render_template,
+    Flask, flash, render_template, jsonify,
     redirect, request, session, url_for)
 from passlib.hash import pbkdf2_sha256
 import uuid
 from flask_pymongo import PyMongo
 from functools import wraps
 from datetime import date
+from pychartjs import BaseChart, ChartType, Color
 if os.path.exists("env.py"):
     import env
 
@@ -119,10 +120,21 @@ def delete_ticket(ticket_id):
     return Ticket().delete_ticket(ticket_id=ticket_id)
 
 
+@app.route('/chart')
+@login_required
+def chart():
+    ticket = Ticket().get_tickets()
+    return jsonify(ticket)
+
+
 @app.route('/stats')
 @login_required
 def stats():
-    return render_template("stats.html")
+    return render_template('stats.html')
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 @app.route("/search_ticket", methods=["GET", "POST"])

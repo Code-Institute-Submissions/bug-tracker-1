@@ -150,4 +150,56 @@ $(document).ready(function () {
       }
     }
   });
+
+  
+  function tickets_count(data) {
+    var open = [],
+        in_progress = [],
+        resolved = [],
+        on_hold = []
+  
+    data.forEach(element => {
+      if (element.status == "Open") {
+        open.push(element);
+      }
+      if (element.status == "In_Progress") {
+        in_progress.push(element);
+      }
+      if (element.status == "Resolved") {
+        resolved.push(element);
+      }
+      if (element.status == "On_Hold") {
+        on_Hold.push(element);
+      }
+  
+    });  
+    return[open.length, in_progress.length, resolved.length, on_hold.length];
+  }
+
+  if (window.location.pathname == "/stats"){
+
+    var getData = $.get("/chart");
+    getData.done(function(response) {
+
+      tickets_count = tickets_count(response);
+      var ctx = document.getElementById("chart_stats").getContext("2d");
+
+        if(chart_stats)
+        {chart_stats.destroy();}
+
+      var chart_stats = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Open', 'In Progress', 'Resolved', 'On Hold'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [tickets_count[0], tickets_count[1], tickets_count[2], tickets_count[3]]
+            }]
+        },
+        options: {}
+      });
+    })
+  }
 });
