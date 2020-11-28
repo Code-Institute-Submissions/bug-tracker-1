@@ -35,6 +35,11 @@ a:hover {
     text-transform: none;
 }
 
+.fixed-action-btn {
+    bottom: 50px;
+    right: 10px;
+}
+
 /* ################################# Navbar #################################*/
 
 .navbar-logo {

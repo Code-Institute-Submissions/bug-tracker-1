@@ -125,6 +125,15 @@ def stats():
     return render_template("stats.html")
 
 
+@app.route("/search_ticket", methods=["GET", "POST"])
+def search_ticket():
+    query = request.form.get("search-tab")
+    tickets = list(mongo.db.tickets.find({"$text": {"$search": query}}))
+    if len(tickets) == 0:
+        flash("No tickets found.")
+    return render_template("dashboard.html", tickets=tickets)
+
+
 class User:
 
     def start_session(self, user):

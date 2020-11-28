@@ -10,6 +10,9 @@ $(document).ready(function () {
   $('select').formSelect();
   $('.carousel').carousel();
   $('.modal').modal();
+  $('.fixed-action-btn').floatingActionButton({
+    direction: 'left'
+  });
   $("#due_date").datepicker({
     format: 'dd/mm/yyyy',
     minDate: date,
