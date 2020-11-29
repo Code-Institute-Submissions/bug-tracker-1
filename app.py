@@ -180,6 +180,10 @@ class User:
             flash("Username address already in use")
             return redirect(url_for("signup"))
 
+        elif mongo.db.users.find_one({"email": user["email"]}):
+            flash("Email address already in use")
+            return redirect(url_for("signup"))
+
         # Insert User in the Database
         if mongo.db.users.insert_one(user):
             return self.start_session(user)
