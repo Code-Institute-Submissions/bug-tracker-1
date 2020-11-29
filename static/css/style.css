@@ -79,6 +79,14 @@ a:hover {
     max-width: 900px;
 }
 
+li > input {
+    width: 170px !important;
+}
+
+.floating-input {
+    margin-right: 0 !important;
+}
+
 /* ################################# Tabs #################################*/
 
 .search-tab-wrapper {
