@@ -123,18 +123,18 @@ def delete_ticket(ticket_id):
 @app.route('/chart')
 @login_required
 def chart():
-    ticket = Ticket().get_tickets()
-    return jsonify(ticket)
+    tickets = Ticket().get_tickets()
+    filtered = []
+    for x in tickets:
+        if x["submited_by"] == session["user"]["username"]:
+            filtered.append(x)
+    return jsonify(tickets, filtered)
 
 
 @app.route('/stats')
 @login_required
 def stats():
     return render_template('stats.html')
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
 
 
 @app.route("/search_ticket", methods=["GET", "POST"])

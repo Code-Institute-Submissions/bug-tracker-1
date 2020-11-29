@@ -1,19 +1,57 @@
 {% include 'head.html' %} {% include 'navbar.html' %}
 <div class="container container-tickets">
-  <div class="row">
-    <div class="card">
-      <div class="card-content">
-        <div class="row">
-          <span class="card-title teal-text">Stats</span>
+  <div class="card">
+    <div class="card-content">
+      <div class="row">
+        <span class="card-title teal-text">Stats</span>
+      </div>
+      <div class="row">
+        <div class="card-action">
+          <p class="teal-text center card-title">Your tickets</p>
         </div>
-        <div class="row">
-          <canvas
-            id="chart_stats"
-            name="chart_stats"
-            width="600"
-            height="400"
-          ></canvas>
+        <div class="col s6 m6 l3 center card-col">
+          <div class="card grey darken-1">
+            <div class="white-text card-stats">
+              <span class="card-title">Open</span>
+              <h4 id="card_open">0</h4>
+            </div>
+          </div>
         </div>
+        <div class="col s6 m6 l3 center card-col">
+          <div class="card blue darken-3">
+            <div class="white-text card-stats">
+              <span class="card-title">In Progress</span>
+              <h4 id="card_in_progress">0</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m6 l3 center card-col">
+          <div class="card green darken-3">
+            <div class="white-text card-stats">
+              <span class="card-title">Resolved</span>
+              <h4 id="card_resolved">0</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m6 l3 center card-col">
+          <div class="card orange darken-4">
+            <div class="white-text card-stats">
+              <span class="card-title">On Hold</span>
+              <h4 id="card_on_hold">0</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-action">
+          <p class="teal-text center card-title">All tickets</p>
+        </div>
+        <canvas
+          id="chart_stats"
+          name="chart_stats"
+          width="600"
+          height="400"
+        ></canvas>
       </div>
     </div>
   </div>

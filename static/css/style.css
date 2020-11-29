@@ -153,6 +153,15 @@ li > input {
   .profile-picture > img {
       width: 150px;
   }
+/* ################################# Footer #################################*/
+
+.card-stats {
+    padding: 15px 5px 15px 5px;
+}
+
+.card-col {
+    padding: 5px !important;
+}
 
 /* ################################# Footer #################################*/
 

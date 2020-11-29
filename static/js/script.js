@@ -156,24 +156,47 @@ $(document).ready(function () {
     var open = [],
         in_progress = [],
         resolved = [],
-        on_hold = []
-  
-    data.forEach(element => {
+        on_hold = [], 
+        filtered_open = [],
+        filtered_in_progress = [],
+        filtered_resolved = [],
+        filtered_on_hold = []
+
+    // Count Total Tickets
+    data[0].forEach(element => {
       if (element.status == "Open") {
         open.push(element);
       }
-      if (element.status == "In_Progress") {
+      if (element.status == "In Progress") {
         in_progress.push(element);
       }
       if (element.status == "Resolved") {
         resolved.push(element);
       }
-      if (element.status == "On_Hold") {
-        on_Hold.push(element);
+      if (element.status == "On Hold") {
+        on_hold.push(element);
       }
   
     });  
-    return[open.length, in_progress.length, resolved.length, on_hold.length];
+
+    // Count User Tickets
+    data[1].forEach(element => {
+      if (element.status == "Open") {
+        filtered_open.push(element);
+      }
+      if (element.status == "In Progress") {
+        filtered_in_progress.push(element);
+      }
+      if (element.status == "Resolved") {
+        filtered_resolved.push(element);
+      }
+      if (element.status == "On Hold") {
+        filtered_on_hold.push(element);
+      }
+  
+    }); 
+    return[open.length, in_progress.length, resolved.length, on_hold.length, 
+      filtered_open.length, filtered_in_progress.length, filtered_resolved.length, filtered_on_hold.length];
   }
 
   if (window.location.pathname == "/stats"){
@@ -192,14 +215,21 @@ $(document).ready(function () {
         data: {
             labels: ['Open', 'In Progress', 'Resolved', 'On Hold'],
             datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: [
+                  "#757575  ", "#1565c0  ", "#2e7d32 ", "#e65100 " 
+                ],
                 data: [tickets_count[0], tickets_count[1], tickets_count[2], tickets_count[3]]
             }]
         },
-        options: {}
+        options: {
+          legend: {
+            display: false
+        }}
       });
+      $("#card_open").text(tickets_count[4])
+      $("#card_in_progress").text(tickets_count[5])
+      $("#card_resovled").text(tickets_count[6])
+      $("#card_on_hold").text(tickets_count[7])
     })
   }
 });
