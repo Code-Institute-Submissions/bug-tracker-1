@@ -48,10 +48,12 @@ $(document).ready(function () {
   $("#signup_form").validate({
     rules: {
         username: {
+          maxLength: 15,
           required: true,
         },
         name: {
-            required: true,
+            maxLength: 40,
+            required: true
         },
         dob: {
           required: true
@@ -61,7 +63,8 @@ $(document).ready(function () {
             email: true
         },
         password: {
-            minlength: 5
+            minlength: 5,
+            maxLength: 15
         },
         profile_picture: {
             accept: "image/*"
@@ -87,7 +90,8 @@ $(document).ready(function () {
   $("#edit_profile_form").validate({
     rules: {
         name: {
-            required: true,
+          maxLength: 40,
+          required: true
         },
         dob: {
           required: true
@@ -97,7 +101,8 @@ $(document).ready(function () {
             email:true
         },
         password: {
-            minlength: 5
+            minlength: 5,
+            maxLength: 15
         },
         profile_picture: {
             accept: "image/*"
@@ -123,12 +128,15 @@ $(document).ready(function () {
   $("#new_ticket_form").validate({
     rules: {
       title: {
-          required: true,
+          minlength: 5,
+          maxlength: 50,
+          required: true
       },
       due_date: {
         required: true
       },
       description: {
+          maxLength: 500,
           required: true
       },
       attachment: {
