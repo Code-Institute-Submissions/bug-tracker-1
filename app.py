@@ -155,11 +155,9 @@ class User:
 
     def signup(self):
 
-        if "profile_picture" in request.files:
+        if ("profile_picture" in request.files):
             profile_picture = request.files["profile_picture"]
             mongo.save_file(profile_picture.filename, profile_picture)
-        else:
-            profile_picture.filename = ""
 
         # Create User object
         user = {
@@ -218,11 +216,12 @@ class User:
             else:
                 newPassword = pbkdf2_sha256.hash(request.form["password"])
 
-        if "profile_picture" in request.files:
+        if ("profile_picture" in request.files) and (request.files["profile_picture"].filename != ""):
             profile_picture = request.files["profile_picture"]
             mongo.save_file(profile_picture.filename, profile_picture)
+            updated_picture = profile_picture.filename
         else:
-            profile_picture.filename = ""
+            updated_picture = currentUser["profile_picture_name"]
 
         user = {
             "username": username,
@@ -230,7 +229,7 @@ class User:
             "email": request.form["email"],
             "dob": request.form["dob"],
             "password": newPassword,
-            "profile_picture_name": profile_picture.filename
+            "profile_picture_name": updated_picture
         }
 
         dbResponse = mongo.db.users.update_one(
