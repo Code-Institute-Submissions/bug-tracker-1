@@ -1,4 +1,4 @@
-{% include 'head.html' %} {% include 'navbar.html' %}
+{% extends 'base.html' %} {% include 'navbar.html' %} {% block content %}
 <div class="container container-tickets">
   <div class="card">
     <div class="card-content">
@@ -56,4 +56,4 @@
     </div>
   </div>
 </div>
-{% include "footer.html" %} {% include "scripts.html" %}
+{% include "footer.html" %} {% endblock %}

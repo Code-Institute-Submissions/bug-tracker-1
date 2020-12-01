@@ -1,5 +1,4 @@
-{% include 'head.html' %} {% include 'navbar.html' %} {% include
-'flash_message.html' %}
+{% extends 'base.html' %} {% include 'navbar.html' %} {% block content %}
 <section>
   <div class="row">
     <!-- Tabs -->
@@ -71,4 +70,4 @@
     </div>
   </div>
 </section>
-{% include "footer.html" %} {% include "scripts.html" %}
+{% include "footer.html" %} {% endblock %}

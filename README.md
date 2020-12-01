@@ -105,7 +105,7 @@ Throughout the project, the following technologies were used.
 	 
 
 ## Testing
-Detailed tests can be found here. 
+Detailed tests can be found [here](https://github.com/ThiagoHardt/bug-tracker/blob/main/Tests.md). 
 
 ## Deployment
 
