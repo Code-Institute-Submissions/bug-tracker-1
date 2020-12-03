@@ -35,10 +35,6 @@ a:hover {
     text-transform: none;
 }
 
-.fixed-action-btn {
-    bottom: 50px;
-    right: 10px;
-}
 
 /* ################################# Navbar #################################*/
 
@@ -79,21 +75,19 @@ a:hover {
     max-width: 900px;
 }
 
-li > input {
-    width: 170px !important;
-}
-
 .floating-input {
     margin-right: 0 !important;
 }
 
-/* ################################# Tabs #################################*/
-
-.search-tab-wrapper {
-    margin-top: 2px;
-    margin-bottom: 0;
-    top: 1px;
+.btn-search-container {
+    margin-top: 10px;
 }
+
+.row-search {
+    margin-bottom: 0px;
+}
+
+/* ################################# Tabs #################################*/
 
 .tabs .tab a {
     color:#008080;
@@ -153,7 +147,7 @@ li > input {
   .profile-picture > img {
       width: 150px;
   }
-/* ################################# Footer #################################*/
+/* ################################# Stats #################################*/
 
 .card-stats {
     padding: 15px 5px 15px 5px;

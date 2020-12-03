@@ -1,13 +1,11 @@
 <div class="tickets-wrapper">
   {% if tickets|length > 0 %}
-
   <ul class="collapsible" id="open_tab">
-    {% for ticket in tickets %} {%if (ticket.status == 'Open') and
-    (ticket.submited_by == session["user"]["username"]) %}
+    {% for ticket in tickets %} {%if (ticket.status == 'Open') %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
-        Ticket #{{ticket.ticket_number}}
+        Ticket #{{ticket.ticket_number}} - {{ticket.title}}
         <div class="arrow-collapsible">
           <i class="material-icons">keyboard_arrow_down</i>
         </div>
@@ -33,7 +31,6 @@
               <a
                 class="waves-effect waves-light btn right"
                 href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
-                target="_blank"
                 >Details</a
               >
             </div>
@@ -46,7 +43,8 @@
   <!-- In Progress Tab -->
   <ul class="collapsible" id="in_progress_tab">
     {% for ticket in tickets %} {%if (ticket.status == 'In Progress') and
-    (ticket.submited_by == session["user"]["username"]) %}
+    ((ticket.submited_by == session["user"]["username"]) or (ticket.assigned_to
+    == session["user"]["username"])) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -76,7 +74,6 @@
               <a
                 class="waves-effect waves-light btn right"
                 href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
-                target="_blank"
                 >Details</a
               >
             </div>
@@ -89,7 +86,8 @@
   <!-- Resolved Tab -->
   <ul class="collapsible" id="resolved_tab">
     {% for ticket in tickets %} {%if (ticket.status == 'Resolved') and
-    (ticket.submited_by == session["user"]["username"]) %}
+    ((ticket.submited_by == session["user"]["username"]) or (ticket.assigned_to
+    == session["user"]["username"])) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -119,7 +117,6 @@
               <a
                 class="waves-effect waves-light btn right"
                 href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
-                target="_blank"
                 >Details</a
               >
             </div>
@@ -132,7 +129,8 @@
   <!-- On Hold Tab -->
   <ul class="collapsible" id="on_hold_tab">
     {% for ticket in tickets %} {%if (ticket.status == 'On Hold') and
-    (ticket.submited_by == session["user"]["username"]) %}
+    ((ticket.submited_by == session["user"]["username"]) or (ticket.assigned_to
+    == session["user"]["username"])) %}
     <li>
       <div class="collapsible-header" id="tab_header">
         <i class="material-icons">article</i>
@@ -162,7 +160,6 @@
               <a
                 class="waves-effect waves-light btn right"
                 href="{{ url_for('get_ticket_details', ticket_id=ticket._id) }}"
-                target="_blank"
                 >Details</a
               >
             </div>

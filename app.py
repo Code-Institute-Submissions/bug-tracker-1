@@ -7,7 +7,6 @@ import uuid
 from flask_pymongo import PyMongo
 from functools import wraps
 from datetime import date
-from pychartjs import BaseChart, ChartType, Color
 if os.path.exists("env.py"):
     import env
 
@@ -139,7 +138,7 @@ def stats():
 
 @app.route("/search_ticket", methods=["GET", "POST"])
 def search_ticket():
-    query = request.form.get("search-tab")
+    query = request.form.get("search_tab")
     tickets = list(mongo.db.tickets.find({"$text": {"$search": query}}))
     if len(tickets) == 0:
         flash("No tickets found.")
@@ -298,7 +297,10 @@ class Ticket:
     def update_ticket_status(self, ticket_id):
         dbResponse = mongo.db.tickets.update_one(
             {'_id': ticket_id},
-            {"$set": {"status": request.form["ticket_status"]}})
+            {"$set": {"status": request.form["ticket_status"],
+                      "assigned_to": session["user"]["username"]
+                      }
+             })
 
         if dbResponse.modified_count == 1:
             flash(("Ticket Status Updated Successfully"))
