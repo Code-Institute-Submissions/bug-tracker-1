@@ -85,7 +85,6 @@ $(document).ready(function () {
       }
     },
   });
-  
   // Edit Profile Form
   $("#edit_profile_form").validate({
     rules: {
@@ -123,6 +122,7 @@ $(document).ready(function () {
       }
     },
   });
+  
 
   // New Ticket Form
   $("#new_ticket_form").validate({
@@ -138,14 +138,6 @@ $(document).ready(function () {
       description: {
           maxLength: 500,
           required: true
-      },
-      attachment: {
-          accept: "image/*"
-      },
-    },
-    messages: {
-      attachment: {
-        accept: "Only images are accepted."
       }
     },
     errorElement : 'div',
@@ -158,6 +150,7 @@ $(document).ready(function () {
       }
     }
   });
+  
 
   
   function tickets_count(data) {

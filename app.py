@@ -206,14 +206,15 @@ class User:
         return redirect(url_for("login"))
 
     def edit_profile(self, username):
-
         currentUser = mongo.db.users.find_one({'username': username})
-        newPassword = currentUser["password"]
+        new_email = currentUser["email"]
+        new_password = currentUser["password"]
+
         if pbkdf2_sha256.verify(request.form["password"], currentUser["password"]) == False:
             if request.form["password"] == "":
-                newPassword = (currentUser["password"])
+                new_password = (currentUser["password"])
             else:
-                newPassword = pbkdf2_sha256.hash(request.form["password"])
+                new_password = pbkdf2_sha256.hash(request.form["password"])
 
         if ("profile_picture" in request.files) and (request.files["profile_picture"].filename != ""):
             profile_picture = request.files["profile_picture"]
@@ -222,12 +223,22 @@ class User:
         else:
             updated_picture = currentUser["profile_picture_name"]
 
+        if (new_email != request.form["email"]) and (not mongo.db.users.find_one({"email": request.form["email"]})):
+            new_email = request.form["email"]
+
+        elif (new_email == request.form["email"]):
+            new_email = request.form["email"]
+
+        else:
+            flash("Email address already in use")
+            return render_template("edit_profile.html")
+
         user = {
             "username": username,
             "name": request.form["name"],
-            "email": request.form["email"],
+            "email": new_email,
             "dob": request.form["dob"],
-            "password": newPassword,
+            "password": new_password,
             "profile_picture_name": updated_picture
         }
 
