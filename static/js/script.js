@@ -48,11 +48,11 @@ $(document).ready(function () {
   $("#signup_form").validate({
     rules: {
         username: {
-          maxLength: 15,
+          maxlength: 15,
           required: true,
         },
         name: {
-            maxLength: 40,
+            maxlength: 40,
             required: true
         },
         dob: {
@@ -64,7 +64,7 @@ $(document).ready(function () {
         },
         password: {
             minlength: 5,
-            maxLength: 15
+            maxlength: 15
         },
         profile_picture: {
             accept: "image/*"
@@ -89,7 +89,7 @@ $(document).ready(function () {
   $("#edit_profile_form").validate({
     rules: {
         name: {
-          maxLength: 40,
+          maxlength: 40,
           required: true
         },
         dob: {
@@ -101,7 +101,7 @@ $(document).ready(function () {
         },
         password: {
             minlength: 5,
-            maxLength: 15
+            maxlength: 15
         },
         profile_picture: {
             accept: "image/*"
@@ -136,7 +136,7 @@ $(document).ready(function () {
         required: true
       },
       description: {
-          maxLength: 500,
+          maxlength: 500,
           required: true
       }
     },
