@@ -270,10 +270,15 @@ class User:
         return redirect("/login")
 
     def demo_login(self):
+        '''Log in as a demo user. This is for demonstration purposes only.'''
+
         user = mongo.db.users.find_one({"username": "Demo"})
         return self.start_session(user)
 
     def delete_files(self):
+        '''This deletes all the chunks and files created 
+        when a profile picture is inserted in the database'''
+
         if (mongo.db.fs.files.find_one({"filename": session["user"]["profile_picture_name"]})):
             old_file = mongo.db.fs.files.find_one(
                 {"filename": session["user"]["profile_picture_name"]})
@@ -356,6 +361,9 @@ class Ticket:
         return redirect("/dashboard")
 
     def delete_attachment_files(self, ticket_id):
+        '''This deletes all the chunks and files created 
+        when a attachment is inserted in the database'''
+
         ticket = mongo.db.tickets.find_one({"_id": ticket_id})
 
         if (mongo.db.fs.files.find_one({"filename": ticket["attachment_name"]})):
