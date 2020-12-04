@@ -157,7 +157,10 @@ class User:
 
         if ("profile_picture" in request.files):
             profile_picture = request.files["profile_picture"]
-            profile_picture.filename = uuid.uuid4().hex
+            if (profile_picture.filename != ""):
+                profile_picture.filename = uuid.uuid4().hex
+            else:
+                profile_picture.filename = ""
             mongo.save_file(profile_picture.filename, profile_picture)
 
         # Create User object
@@ -324,9 +327,14 @@ class Ticket:
         return render_template('ticket.html', ticket=ticket)
 
     def update_ticket_status(self, ticket_id):
+        if (len(request.form) <= 1):
+            ticket = mongo.db.tickets.find_one({"_id": ticket_id})
+            status = ticket["status"]
+        else:
+            status = request.form["ticket_status"]
         dbResponse = mongo.db.tickets.update_one(
             {'_id': ticket_id},
-            {"$set": {"status": request.form["ticket_status"],
+            {"$set": {"status": status,
                       "assigned_to": session["user"]["username"]
                       }
              })
@@ -335,8 +343,10 @@ class Ticket:
             flash(("Ticket Status Updated Successfully"))
             ticket = mongo.db.tickets.find_one({"_id": ticket_id})
             return render_template('ticket.html', ticket=ticket)
+        else:
+            flash(("Failed to update ticket."))
+            ticket = mongo.db.tickets.find_one({"_id": ticket_id})
 
-        flash(("Failed to update ticket."))
         return render_template('ticket.html', ticket=ticket)
 
     def delete_ticket(self, ticket_id):
