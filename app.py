@@ -5,6 +5,7 @@ from flask import (
 from passlib.hash import pbkdf2_sha256
 import uuid
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from functools import wraps
 from datetime import date
 if os.path.exists("env.py"):
@@ -156,6 +157,7 @@ class User:
 
         if ("profile_picture" in request.files):
             profile_picture = request.files["profile_picture"]
+            profile_picture.filename = uuid.uuid4().hex
             mongo.save_file(profile_picture.filename, profile_picture)
 
         # Create User object
@@ -218,8 +220,12 @@ class User:
 
         if ("profile_picture" in request.files) and (request.files["profile_picture"].filename != ""):
             profile_picture = request.files["profile_picture"]
+            profile_picture.filename = uuid.uuid4().hex
+
+            self.delete_files()
             mongo.save_file(profile_picture.filename, profile_picture)
             updated_picture = profile_picture.filename
+
         else:
             updated_picture = currentUser["profile_picture_name"]
 
@@ -253,13 +259,25 @@ class User:
         return render_template("edit_profile.html")
 
     def delete_user(self, user_id):
+
+        self.delete_files()
         mongo.db.users.remove({"_id": user_id})
+
         flash("Account deleted successfully.")
         return redirect("/login")
 
     def demo_login(self):
         user = mongo.db.users.find_one({"username": "Demo"})
         return self.start_session(user)
+
+    def delete_files(self):
+        if (mongo.db.fs.files.find_one({"filename": session["user"]["profile_picture_name"]})):
+            old_file = mongo.db.fs.files.find_one(
+                {"filename": session["user"]["profile_picture_name"]})
+            mongo.db.fs.chunks.remove(
+                {"files_id": ObjectId(old_file["_id"])})
+            mongo.db.fs.files.remove(
+                {"filename": session["user"]["profile_picture_name"]})
 
 
 class Ticket:
@@ -322,9 +340,21 @@ class Ticket:
         return render_template('ticket.html', ticket=ticket)
 
     def delete_ticket(self, ticket_id):
+        self.delete_attachment_files(ticket_id)
         mongo.db.tickets.remove({"_id": ticket_id})
         flash("Ticket deleted successfully.")
         return redirect("/dashboard")
+
+    def delete_attachment_files(self, ticket_id):
+        ticket = mongo.db.tickets.find_one({"_id": ticket_id})
+
+        if (mongo.db.fs.files.find_one({"filename": ticket["attachment_name"]})):
+            old_file = mongo.db.fs.files.find_one(
+                {"filename": ticket["attachment_name"]})
+            mongo.db.fs.chunks.remove(
+                {"files_id": ObjectId(old_file["_id"])})
+            mongo.db.fs.files.remove(
+                {"filename": ticket["attachment_name"]})
 
 
 if __name__ == "__main__":
