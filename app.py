@@ -149,11 +149,14 @@ def search_ticket():
 class User:
 
     def start_session(self, user):
+        ''' Starts user session and loads dashboard information '''
+
         session["logged_in"] = True
         session["user"] = user
         return redirect("/dashboard")
 
     def signup(self):
+        ''' Signup user. If no duplicates are found add the user into the database. '''
 
         if ("profile_picture" in request.files):
             profile_picture = request.files["profile_picture"]
@@ -194,6 +197,7 @@ class User:
         return redirect(url_for("signup"))
 
     def login(self):
+        '''Checks for username and password if it finds the user starts the session '''
 
         user = mongo.db.users.find_one({
             "username": request.form.get("username")
@@ -206,11 +210,15 @@ class User:
         return redirect(url_for("login"))
 
     def logout(self):
+        ''' Clear the user stored in the session '''
+
         session.clear()
         flash("You have been logged out")
         return redirect(url_for("login"))
 
     def edit_profile(self, username):
+        ''' Updates the user profile after several validations '''
+
         currentUser = mongo.db.users.find_one({'username': username})
         new_email = currentUser["email"]
         new_password = currentUser["password"]
@@ -262,6 +270,7 @@ class User:
         return render_template("edit_profile.html")
 
     def delete_user(self, user_id):
+        ''' Deletes user from database acording to the id '''
 
         self.delete_files()
         mongo.db.users.remove({"_id": user_id})
@@ -290,6 +299,7 @@ class User:
 
 class Ticket:
     def new_ticket(self):
+        ''' Creates a new ticket if validation passes '''
 
         if "attachment" in request.files:
             attachment = request.files["attachment"]
@@ -324,14 +334,20 @@ class Ticket:
         flash("Ticket creation failed.")
 
     def get_tickets(self):
+        ''' Load all tickets in the database '''
+
         tickets = list(mongo.db.tickets.find())
         return tickets
 
     def get_ticket_details(self, ticket_id):
+        ''' Get details of the requested ticket acording to the id '''
+
         ticket = mongo.db.tickets.find_one({"_id": ticket_id})
         return render_template('ticket.html', ticket=ticket)
 
     def update_ticket_status(self, ticket_id):
+        ''' Update ticket if passes validation. '''
+
         if (len(request.form) <= 1):
             ticket = mongo.db.tickets.find_one({"_id": ticket_id})
             status = ticket["status"]
@@ -355,6 +371,8 @@ class Ticket:
         return render_template('ticket.html', ticket=ticket)
 
     def delete_ticket(self, ticket_id):
+        ''' Deletes ticket according to specified id'''
+
         self.delete_attachment_files(ticket_id)
         mongo.db.tickets.remove({"_id": ticket_id})
         flash("Ticket deleted successfully.")

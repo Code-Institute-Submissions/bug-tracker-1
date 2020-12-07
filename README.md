@@ -60,12 +60,15 @@ Allows the user to close or edit account information such as name, date of birth
 
 - **Dashboard** <br>
 Shows all tickets created by the user and categorizes them in different tabs by **Open**, **In Progress**, **Resolved** and **On Hold**. Clicking on a ticket will show a brief description with a **title**, **date created**, **due date**, **description**, **priority** and a **details button** that takes you to the expanded ticket view.
+   - Tickets in the open tab can be seen by everyone.
+   - After a user changes a ticket status that user will be assigned to that ticket and it will be visible only to him and the user that created the ticket.  
 
 - **Ticket** <br>
 Tickets have the following properties: **Number**, **Title**, **Date Created**, **Due Date**, **Priority**, **Status**, **Description** and **Attachment**.
 
 - **Edit Ticket** <br>
 Tickets can't be updated after they have been created appart from their status. They can be deleted though.
+   - The delete button only appears to the user that created the ticket.
 
 - **Create a new Ticket** <br>
 Clicking on the link "New Ticket" on the navbar will open the ticket creation page. The page have input fields where the user should fill title, due date, description, priority and attachment. All tickets will automatically be created as status OPEN and NORMAL priority.
@@ -138,6 +141,16 @@ If you want to fork the repository to your own GitHub account you can by clickin
     files to.
  5. Type “git clone” and paste the copied URL
  6. Press enter and you should have your local file cloned and ready.
+ 7. After opening the folder you should create a new file in the root directory, name it env.py
+ 8. In env.py you can set your environment variables.  
+    ``` import os
+      import os
+
+      os.environ.setdefault("IP", "<your value>")
+      os.environ.setdefault("PORT", "<your value>")
+      os.environ.setdefault("SECRET_KEY", "<your value>")
+      os.environ.setdefault("MONGO_URI", "<your value>")
+      os.environ.setdefault("MONGO_DBNAME", "<your value>") 
 
 ## Credits
 
