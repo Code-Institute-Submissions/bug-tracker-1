@@ -101,8 +101,14 @@
   - If not registered clicking on the login button returns an error.
 
 
-- Signup form
+- Signup form / Edit Profile form
   - Form only submits when all required fields are valid. 
+  - Duplicated emails or usernames are not accepted.
+  - Error messages are shown properly.
+
+- New Ticket form
+  - Form only submits when all required fields are valid. 
+  - Error messages are shown properly.
 
  
 ### Browsers
